@@ -5,9 +5,6 @@ import src.core.Vertice;
 import java.util.*;
 
 public class GrafoMatrizAdjacencia extends AbstractGrafo {
-
-    /* Inserir Vertice: mapear no HashMap.
-     * Inserir Aresta: mapear na Matriz. */
     private int _tamanhoAtual = 0;
 
     private Integer[][] _matrizAdj;
