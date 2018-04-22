@@ -2,35 +2,40 @@ package src.grafos;
 
 import src.core.Vertice;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class GrafoMatrizAdjacencia extends AbstractGrafo {
 
     /* Inserir Vertice: mapear no HashMap.
      * Inserir Aresta: mapear na Matriz. */
-    private int _quantidadeVertices = 0;
     private int _tamanhoAtual = 0;
 
-    Float[][] _matrizAdj = new Float[_quantidadeVertices][_quantidadeVertices];
+    Float[][] _matrizAdj;
 
     Map<Integer, Vertice> IntToVert = new HashMap<>();
     Map<Vertice, Integer> VertToInt = new HashMap<>();
 
     @Override
-    public Iterator<Vertice> getVerticesAdjacentes(Vertice u) {
-        return null;
+    public Iterator<Vertice> getVerticesAdjacentes(Vertice vertice) {
+        if (vertice == null || !VertToInt.containsKey(vertice)) {
+            return Collections.emptyIterator();
+        }
+
+        ArrayList<Vertice> adjs = new ArrayList<>();
+        int key = VertToInt.get(vertice);
+
+        for (int i = 0; i < _tamanhoAtual; i++) {
+            if (_matrizAdj[key][i] != null) {
+                adjs.add(IntToVert.get(i));
+            }
+        }
+
+        return adjs.iterator();
     }
 
     @Override
     public Iterator<Vertice> getVertices() {
-        return null;
-    }
-
-    @Override
-    public int getQuantidadeVertices() {
-        return 0;
+        return VertToInt.keySet().iterator();
     }
 
     @Override
