@@ -5,14 +5,12 @@ import src.core.Vertice;
 import src.exception.InvalidFormatFileException;
 
 import java.io.*;
-import java.util.Iterator;
-import java.util.Map;
 
 abstract public class AbstractGrafo implements Grafo {
     private int _quantidadeVertices = 0;
 
     @Override
-    public void mount(String arquivo) throws IOException {
+    public void load(String arquivo) throws IOException {
         File file = new File(arquivo);
         if (!file.exists() || !file.isFile()) {
             throw new FileNotFoundException("Arquivo inválido");
@@ -55,18 +53,6 @@ abstract public class AbstractGrafo implements Grafo {
     public int getQuantidadeVertices() {
         return _quantidadeVertices;
     }
-
-    @Override
-    abstract public Iterator<Vertice> getVerticesAdjacentes(Vertice u);
-
-    @Override
-    abstract public Iterator<Vertice> getVertices();
-
-    @Override
-    abstract public Iterator<Map.Entry<Vertice, Integer>> getGrauVertices();
-
-    @Override
-    abstract public boolean existVertice(Vertice vertice);
 
     @Override
     abstract public void adicionarVertice(Vertice vertice);

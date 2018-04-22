@@ -39,4 +39,11 @@ public class Vertice {
     public int hashCode() {
         return Objects.hashCode(this.getValor());
     }
+
+    @Override
+    public String toString() {
+        return "Vertice{" +
+                "valor='" + valor + '\'' +
+                '}';
+    }
 }

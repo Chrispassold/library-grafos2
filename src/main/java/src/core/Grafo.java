@@ -6,7 +6,7 @@ import java.util.Map;
 
 public interface Grafo {
 
-    void mount(String arquivo) throws IOException;
+    void load(String arquivo) throws IOException;
 
     Iterator<Vertice> getVerticesAdjacentes(Vertice u);
 

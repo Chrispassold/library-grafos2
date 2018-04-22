@@ -2,6 +2,7 @@ package src.grafos;
 
 import src.core.Vertice;
 
+import java.io.IOException;
 import java.util.*;
 
 public class GrafoMatrizAdjacencia extends AbstractGrafo {
@@ -10,10 +11,32 @@ public class GrafoMatrizAdjacencia extends AbstractGrafo {
      * Inserir Aresta: mapear na Matriz. */
     private int _tamanhoAtual = 0;
 
-    Float[][] _matrizAdj;
+    private Integer[][] _matrizAdj;
 
-    Map<Integer, Vertice> IntToVert = new HashMap<>();
-    Map<Vertice, Integer> VertToInt = new HashMap<>();
+    private Map<Integer, Vertice> IntToVert = new HashMap<>();
+    private Map<Vertice, Integer> VertToInt = new HashMap<>();
+
+
+    @Override
+    public void load(String arquivo) throws IOException {
+        super.load(arquivo);
+
+        _matrizAdj = new Integer[getQuantidadeVertices()][getQuantidadeVertices()];
+    }
+
+    /**
+     * Função responsável por mapear um novo vertice ao HashMap.
+     *
+     * @param vertice vertice a ser adicionado ao HashMap
+     */
+    private void mapeiaVertice(Vertice vertice) {
+        if (!IntToVert.containsKey(this._tamanhoAtual) && !VertToInt.containsKey(vertice)) {
+            this.IntToVert.put(_tamanhoAtual, vertice);
+            this.VertToInt.put(vertice, _tamanhoAtual);
+            System.out.println("key: " + this.VertToInt.get(vertice) + "value: " + this.IntToVert.get(_tamanhoAtual));
+            this._tamanhoAtual++;
+        }
+    }
 
     @Override
     public Iterator<Vertice> getVerticesAdjacentes(Vertice vertice) {
@@ -40,21 +63,52 @@ public class GrafoMatrizAdjacencia extends AbstractGrafo {
 
     @Override
     public Iterator<Map.Entry<Vertice, Integer>> getGrauVertices() {
-        return null;
+        HashMap<Vertice, Integer> grau = new HashMap<>();
+        VertToInt.forEach((vertice, adj) -> {
+
+            Iterator<Vertice> verticesAdjacentes = getVerticesAdjacentes(vertice);
+            int qntAdjacentes = 0;
+            while (verticesAdjacentes.hasNext()) {
+                verticesAdjacentes.next();
+                qntAdjacentes++;
+            }
+
+            grau.put(vertice, qntAdjacentes);
+        });
+
+        return grau.entrySet().iterator();
     }
 
     @Override
     public boolean existVertice(Vertice vertice) {
+        for (Map.Entry<Vertice, Integer> verticeIntegerEntry : VertToInt.entrySet()) {
+            if (verticeIntegerEntry.getKey().equals(vertice)) {
+                return true;
+            }
+        }
+
         return false;
     }
 
     @Override
     public void adicionarVertice(Vertice vertice) {
 
+        if (existVertice(vertice)) {
+            mapeiaVertice(vertice);
+        }
+
     }
 
     @Override
     public void adicionarAresta(Vertice verticeOrigem, Vertice verticeDestino) {
+        adicionarVertice(verticeOrigem);
+        adicionarVertice(verticeDestino);
+        adicionaAdjacencia(verticeOrigem, verticeDestino);
+    }
 
+    private void adicionaAdjacencia(Vertice verticeOrigem, Vertice verticeDestino) {
+        if (existVertice(verticeOrigem) && existVertice(verticeDestino)) {
+            this._matrizAdj[this.VertToInt.get(verticeOrigem)][this.VertToInt.get(verticeDestino)] = 1;
+        }
     }
 }

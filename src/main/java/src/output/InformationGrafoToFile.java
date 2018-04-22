@@ -36,6 +36,7 @@ public class InformationGrafoToFile {
             out.write(String.format("Quantidade de vértices: %d", grafo.getQuantidadeVertices()));
 
             System.out.printf("O arquivo de saída foi gerado em %s", destination);
+            System.out.println();
         }
     }
 }
