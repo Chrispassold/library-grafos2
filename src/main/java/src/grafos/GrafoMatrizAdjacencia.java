@@ -2,7 +2,6 @@ package src.grafos;
 
 import src.core.Vertice;
 
-import java.io.IOException;
 import java.util.*;
 
 public class GrafoMatrizAdjacencia extends AbstractGrafo {
@@ -18,10 +17,9 @@ public class GrafoMatrizAdjacencia extends AbstractGrafo {
 
 
     @Override
-    public void load(String arquivo) throws IOException {
-        super.load(arquivo);
-
-        _matrizAdj = new Integer[getQuantidadeVertices()][getQuantidadeVertices()];
+    public void setQuantidadeVertices(int quantidadeVertices) {
+        super.setQuantidadeVertices(quantidadeVertices);
+        _matrizAdj = new Integer[quantidadeVertices][quantidadeVertices];
     }
 
     /**
@@ -33,7 +31,6 @@ public class GrafoMatrizAdjacencia extends AbstractGrafo {
         if (!IntToVert.containsKey(this._tamanhoAtual) && !VertToInt.containsKey(vertice)) {
             this.IntToVert.put(_tamanhoAtual, vertice);
             this.VertToInt.put(vertice, _tamanhoAtual);
-            System.out.println("key: " + this.VertToInt.get(vertice) + "value: " + this.IntToVert.get(_tamanhoAtual));
             this._tamanhoAtual++;
         }
     }
@@ -93,7 +90,7 @@ public class GrafoMatrizAdjacencia extends AbstractGrafo {
     @Override
     public void adicionarVertice(Vertice vertice) {
 
-        if (existVertice(vertice)) {
+        if (!existVertice(vertice)) {
             mapeiaVertice(vertice);
         }
 

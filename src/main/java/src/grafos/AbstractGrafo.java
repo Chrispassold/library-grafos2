@@ -29,7 +29,7 @@ abstract public class AbstractGrafo implements Grafo {
                         throw new InvalidFormatFileException(lineValues.length);
                     }
 
-                    this._quantidadeVertices = Integer.valueOf(lineValues[0]);
+                    setQuantidadeVertices(Integer.valueOf(lineValues[0]));
 
                     firstLine = false;
                     continue;
@@ -47,6 +47,10 @@ abstract public class AbstractGrafo implements Grafo {
                 adicionarAresta(verticeB, verticeA);
             }
         }
+    }
+
+    public void setQuantidadeVertices(int quantidadeVertices) {
+        this._quantidadeVertices = quantidadeVertices;
     }
 
     @Override
