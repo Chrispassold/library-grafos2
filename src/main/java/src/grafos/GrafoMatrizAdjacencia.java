@@ -4,13 +4,13 @@ import src.core.Vertice;
 
 import java.util.*;
 
-public class GrafoMatrizAdjacencia extends AbstractGrafo {
+public class GrafoMatrizAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
     private int _tamanhoAtual = 0;
 
     private Integer[][] _matrizAdj;
 
-    private Map<Integer, Vertice> IntToVert = new HashMap<>();
-    private Map<Vertice, Integer> VertToInt = new HashMap<>();
+    private Map<Integer, V> IntToVert = new HashMap<>();
+    private Map<V, Integer> VertToInt = new HashMap<>();
 
 
     @Override
@@ -24,7 +24,7 @@ public class GrafoMatrizAdjacencia extends AbstractGrafo {
      *
      * @param vertice vertice a ser adicionado ao HashMap
      */
-    private void mapeiaVertice(Vertice vertice) {
+    private void mapeiaVertice(V vertice) {
         if (!IntToVert.containsKey(this._tamanhoAtual) && !VertToInt.containsKey(vertice)) {
             this.IntToVert.put(_tamanhoAtual, vertice);
             this.VertToInt.put(vertice, _tamanhoAtual);
@@ -33,12 +33,12 @@ public class GrafoMatrizAdjacencia extends AbstractGrafo {
     }
 
     @Override
-    public Iterator<Vertice> getVerticesAdjacentes(Vertice vertice) {
+    public Iterator<V> getVerticesAdjacentes(V vertice) {
         if (vertice == null || !VertToInt.containsKey(vertice)) {
             return Collections.emptyIterator();
         }
 
-        ArrayList<Vertice> adjs = new ArrayList<>();
+        ArrayList<V> adjs = new ArrayList<>();
         int key = VertToInt.get(vertice);
 
         for (int i = 0; i < _tamanhoAtual; i++) {
@@ -51,16 +51,16 @@ public class GrafoMatrizAdjacencia extends AbstractGrafo {
     }
 
     @Override
-    public Iterator<Vertice> getVertices() {
+    public Iterator<V> getVertices() {
         return VertToInt.keySet().iterator();
     }
 
     @Override
-    public Iterator<Map.Entry<Vertice, Integer>> getGrauVertices() {
-        HashMap<Vertice, Integer> grau = new HashMap<>();
+    public Iterator<Map.Entry<V, Integer>> getGrauVertices() {
+        HashMap<V, Integer> grau = new HashMap<>();
         VertToInt.forEach((vertice, adj) -> {
 
-            Iterator<Vertice> verticesAdjacentes = getVerticesAdjacentes(vertice);
+            Iterator<V> verticesAdjacentes = getVerticesAdjacentes(vertice);
             int qntAdjacentes = 0;
             while (verticesAdjacentes.hasNext()) {
                 verticesAdjacentes.next();
@@ -74,8 +74,8 @@ public class GrafoMatrizAdjacencia extends AbstractGrafo {
     }
 
     @Override
-    public boolean existVertice(Vertice vertice) {
-        for (Map.Entry<Vertice, Integer> verticeIntegerEntry : VertToInt.entrySet()) {
+    public boolean existVertice(V vertice) {
+        for (Map.Entry<V, Integer> verticeIntegerEntry : VertToInt.entrySet()) {
             if (verticeIntegerEntry.getKey().equals(vertice)) {
                 return true;
             }
@@ -85,7 +85,7 @@ public class GrafoMatrizAdjacencia extends AbstractGrafo {
     }
 
     @Override
-    public void adicionarVertice(Vertice vertice) {
+    public void adicionarVertice(V vertice) {
 
         if (!existVertice(vertice)) {
             mapeiaVertice(vertice);
@@ -94,13 +94,13 @@ public class GrafoMatrizAdjacencia extends AbstractGrafo {
     }
 
     @Override
-    public void adicionarAresta(Vertice verticeOrigem, Vertice verticeDestino) {
+    public void adicionarAresta(V verticeOrigem, V verticeDestino) {
         adicionarVertice(verticeOrigem);
         adicionarVertice(verticeDestino);
         adicionaAdjacencia(verticeOrigem, verticeDestino);
     }
 
-    private void adicionaAdjacencia(Vertice verticeOrigem, Vertice verticeDestino) {
+    private void adicionaAdjacencia(V verticeOrigem, V verticeDestino) {
         if (existVertice(verticeOrigem) && existVertice(verticeDestino)) {
             this._matrizAdj[this.VertToInt.get(verticeOrigem)][this.VertToInt.get(verticeDestino)] = 1;
         }

@@ -1,24 +1,23 @@
 package src.core;
 
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 
-public interface Grafo {
+public interface Grafo<V extends Vertice> {
 
-    void load(String arquivo) throws IOException;
+    Iterator<V> getVerticesAdjacentes(V u);
 
-    Iterator<Vertice> getVerticesAdjacentes(Vertice u);
+    Iterator<V> getVertices();
 
-    Iterator<Vertice> getVertices();
+    void setQuantidadeVertices(int quantidadeVertices);
 
     int getQuantidadeVertices();
 
-    Iterator<Map.Entry<Vertice, Integer>> getGrauVertices();
+    Iterator<Map.Entry<V, Integer>> getGrauVertices();
 
-    boolean existVertice(Vertice vertice);
+    boolean existVertice(V vertice);
 
-    void adicionarVertice(Vertice vertice);
+    void adicionarVertice(V vertice);
 
-    void adicionarAresta(Vertice verticeOrigem, Vertice verticeDestino);
+    void adicionarAresta(V verticeOrigem, V verticeDestino);
 }

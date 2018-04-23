@@ -42,8 +42,6 @@ public class Vertice {
 
     @Override
     public String toString() {
-        return "Vertice{" +
-                "valor='" + valor + '\'' +
-                '}';
+        return valor;
     }
 }

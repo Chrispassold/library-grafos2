@@ -4,11 +4,11 @@ import src.core.Vertice;
 
 import java.util.*;
 
-public class GrafoListaAdjacencia extends AbstractGrafo {
-    private Map<Vertice, List<Vertice>> grafo = new HashMap<>();
+public class GrafoListaAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
+    private Map<V, List<V>> grafo = new HashMap<>();
 
     @Override
-    public Iterator<Vertice> getVerticesAdjacentes(Vertice vertice) {
+    public Iterator<V> getVerticesAdjacentes(V vertice) {
         if (vertice != null && grafo.containsKey(vertice)) {
             return grafo.get(vertice).iterator();
         } else {
@@ -17,13 +17,13 @@ public class GrafoListaAdjacencia extends AbstractGrafo {
     }
 
     @Override
-    public Iterator<Vertice> getVertices() {
+    public Iterator<V> getVertices() {
         return grafo.keySet().iterator();
     }
 
     @Override
-    public Iterator<Map.Entry<Vertice, Integer>> getGrauVertices() {
-        HashMap<Vertice, Integer> grau = new HashMap<>();
+    public Iterator<Map.Entry<V, Integer>> getGrauVertices() {
+        HashMap<V, Integer> grau = new HashMap<>();
 
         grafo.forEach((vertice, adj) -> {
             grau.put(vertice, adj.size());
@@ -33,8 +33,8 @@ public class GrafoListaAdjacencia extends AbstractGrafo {
     }
 
     @Override
-    public boolean existVertice(Vertice vertice) {
-        for (Map.Entry<Vertice, List<Vertice>> verticeListEntry : grafo.entrySet()) {
+    public boolean existVertice(V vertice) {
+        for (Map.Entry<V, List<V>> verticeListEntry : grafo.entrySet()) {
             if (verticeListEntry.getKey().equals(vertice)) {
                 return true;
             }
@@ -44,7 +44,7 @@ public class GrafoListaAdjacencia extends AbstractGrafo {
     }
 
     @Override
-    public void adicionarVertice(Vertice vertice) {
+    public void adicionarVertice(V vertice) {
         // verifica se o vertice ja esta no grafo
         if (!existVertice(vertice)) {
             grafo.put(vertice, new ArrayList<>());
@@ -53,7 +53,7 @@ public class GrafoListaAdjacencia extends AbstractGrafo {
     }
 
     @Override
-    public void adicionarAresta(Vertice verticeOrigem, Vertice verticeDestino) {
+    public void adicionarAresta(V verticeOrigem, V verticeDestino) {
 
         if (verticeOrigem == null) {
             throw new RuntimeException("Não é possível adicionar um vertice, pois o vertice origem se encontra nulo");
@@ -62,7 +62,7 @@ public class GrafoListaAdjacencia extends AbstractGrafo {
         adicionarVertice(verticeOrigem);
 
         if (verticeDestino != null) {
-            final List<Vertice> adj = grafo.get(verticeOrigem);
+            final List<V> adj = grafo.get(verticeOrigem);
             adj.add(verticeDestino);
 
             grafo.put(verticeOrigem, adj);
