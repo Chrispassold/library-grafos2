@@ -16,6 +16,10 @@ public class BuscaLargura implements Busca {
 
     public BuscaLargura(Grafo<VerticeBuscaLargura> grafo, VerticeBuscaLargura verticeInicial) throws RuntimeException {
 
+        if (grafo == null) {
+            throw new RuntimeException("Grafo nulo");
+        }
+
         if (!grafo.existVertice(verticeInicial)) {
             throw new RuntimeException("Vertice inicial não existe no grafo informado");
         }
