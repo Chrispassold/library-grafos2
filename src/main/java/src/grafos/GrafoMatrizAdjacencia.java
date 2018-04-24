@@ -94,7 +94,7 @@ public class GrafoMatrizAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
     }
 
     @Override
-    public void adicionarAresta(V verticeOrigem, V verticeDestino) {
+    protected void adicionarArestaGrafo(V verticeOrigem, V verticeDestino) {
         adicionarVertice(verticeOrigem);
         adicionarVertice(verticeDestino);
         adicionaAdjacencia(verticeOrigem, verticeDestino);

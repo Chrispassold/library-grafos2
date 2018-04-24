@@ -16,7 +16,7 @@ import java.util.Iterator;
 
 public class TesteBusca {
 
-    GrafoFromFile grafoFromFile;
+    private GrafoFromFile grafoFromFile;
 
     @Before
     public void setup() throws Exception {

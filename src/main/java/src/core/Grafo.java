@@ -13,6 +13,8 @@ public interface Grafo<V extends Vertice> {
 
     int getQuantidadeVertices();
 
+    int getQuantidadeArestas();
+
     Iterator<Map.Entry<V, Integer>> getGrauVertices();
 
     boolean existVertice(V vertice);

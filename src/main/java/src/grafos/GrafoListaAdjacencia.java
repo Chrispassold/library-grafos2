@@ -53,7 +53,7 @@ public class GrafoListaAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
     }
 
     @Override
-    public void adicionarAresta(V verticeOrigem, V verticeDestino) {
+    protected void adicionarArestaGrafo(V verticeOrigem, V verticeDestino) {
 
         if (verticeOrigem == null) {
             throw new RuntimeException("Não é possível adicionar um vertice, pois o vertice origem se encontra nulo");
