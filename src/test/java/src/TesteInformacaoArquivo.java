@@ -2,10 +2,10 @@ package src;
 
 import org.junit.Before;
 import org.junit.Test;
-import src.core.Grafo;
 import src.core.ERepresentacao;
 import src.core.vertices.VerticeBuscaLargura;
 import src.factory.GrafoFactory;
+import src.grafos.AbstractGrafo;
 import src.input.GrafoFromFile;
 import src.output.InformationGrafoToFile;
 
@@ -24,10 +24,7 @@ public class TesteInformacaoArquivo {
     @Test
     public void InformationGrafoToFileTest() throws IOException {
 
-        final Grafo<VerticeBuscaLargura> grafo = GrafoFactory.constroiGrafo(ERepresentacao.LISTA_ADJACENCIA, VerticeBuscaLargura.class);
-        if (grafo == null) {
-            throw new RuntimeException("Grafo nulo");
-        }
+        final AbstractGrafo<VerticeBuscaLargura> grafo = GrafoFactory.constroiGrafo(ERepresentacao.LISTA_ADJACENCIA, VerticeBuscaLargura.class);
 
         //setup grafo
         grafo.setQuantidadeVertices(grafoFromFile.getQuantidadeVertices());

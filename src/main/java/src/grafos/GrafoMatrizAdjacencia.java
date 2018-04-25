@@ -79,19 +79,7 @@ public class GrafoMatrizAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
     }
 
     @Override
-    public boolean existVertice(V vertice) {
-        for (Map.Entry<V, Integer> verticeIntegerEntry : VertToInt.entrySet()) {
-            if (verticeIntegerEntry.getKey().equals(vertice)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    @Override
     public void adicionarVertice(V vertice) {
-
         if (!existVertice(vertice)) {
             mapeiaVertice(vertice);
         }

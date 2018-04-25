@@ -5,11 +5,11 @@ import src.busca.BuscaLargura;
 import src.busca.BuscaProfundidade;
 import src.busca.EBusca;
 import src.core.ERepresentacao;
-import src.core.Grafo;
 import src.core.Vertice;
 import src.core.vertices.VerticeBuscaLargura;
 import src.core.vertices.VerticeBuscaProfundidade;
 import src.factory.GrafoFactory;
+import src.grafos.AbstractGrafo;
 import src.input.GrafoFromConsole;
 import src.input.GrafoFromFile;
 import src.output.InformationGrafoToFile;
@@ -55,7 +55,7 @@ public class Main {
     }
 
     private static void buscaLargura() throws IOException {
-        final Grafo<VerticeBuscaLargura> grafo = GrafoFactory.constroiGrafo(grafoFromConsole.getRepresentacao(), VerticeBuscaLargura.class);
+        final AbstractGrafo<VerticeBuscaLargura> grafo = GrafoFactory.constroiGrafo(grafoFromConsole.getRepresentacao(), VerticeBuscaLargura.class);
         GrafoFromFile grafoFromFile = new GrafoFromFile(grafoFromConsole.getPath());
 
         //setup grafo
@@ -73,7 +73,7 @@ public class Main {
     }
 
     private static void buscaProfundidade() throws IOException {
-        final Grafo<VerticeBuscaProfundidade> grafo = GrafoFactory.constroiGrafo(grafoFromConsole.getRepresentacao(), VerticeBuscaProfundidade.class);
+        final AbstractGrafo<VerticeBuscaProfundidade> grafo = GrafoFactory.constroiGrafo(grafoFromConsole.getRepresentacao(), VerticeBuscaProfundidade.class);
 
         GrafoFromFile grafoFromFile = new GrafoFromFile(grafoFromConsole.getPath());
 
@@ -90,7 +90,7 @@ public class Main {
         buscaLargura.execute();
     }
 
-    private static  <V extends Vertice> void grafoInformationToFile(Grafo<V> grafo) throws IOException {
+    private static <V extends Vertice> void grafoInformationToFile(AbstractGrafo<V> grafo) throws IOException {
         InformationGrafoToFile.toFile(grafo, "grafo.out");
     }
 }

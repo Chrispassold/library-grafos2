@@ -1,8 +1,8 @@
 package src.busca;
 
 import src.core.ECor;
-import src.core.Grafo;
 import src.core.vertices.VerticeBuscaLargura;
+import src.grafos.AbstractGrafo;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -10,11 +10,11 @@ import java.util.List;
 
 public class BuscaLargura implements Busca {
 
-    private Grafo<VerticeBuscaLargura> grafo;
+    private AbstractGrafo<VerticeBuscaLargura> grafo;
     private VerticeBuscaLargura verticeInicial;
     private List<VerticeBuscaLargura> listaBusca = new ArrayList<>();
 
-    public BuscaLargura(Grafo<VerticeBuscaLargura> grafo, VerticeBuscaLargura verticeInicial) throws RuntimeException {
+    public BuscaLargura(AbstractGrafo<VerticeBuscaLargura> grafo, VerticeBuscaLargura verticeInicial) throws RuntimeException {
 
         if (grafo == null) {
             throw new RuntimeException("Grafo nulo");

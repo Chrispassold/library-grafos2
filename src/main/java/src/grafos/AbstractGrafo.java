@@ -1,27 +1,21 @@
 package src.grafos;
 
-import src.core.Grafo;
 import src.core.Vertice;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
-abstract public class AbstractGrafo<V extends Vertice> implements Grafo<V> {
+abstract public class AbstractGrafo<V extends Vertice> {
     private int _quantidadeVertices = 0;
 
-    @Override
     public void setQuantidadeVertices(int quantidadeVertices) {
         this._quantidadeVertices = quantidadeVertices;
     }
 
-    @Override
     public int getQuantidadeVertices() {
         return _quantidadeVertices;
     }
 
-    @Override
     public int getQuantidadeArestas() {
         int arestas = 0;
         final Iterator<Map.Entry<V, Integer>> grauVertices = getGrauVertices();
@@ -33,10 +27,6 @@ abstract public class AbstractGrafo<V extends Vertice> implements Grafo<V> {
         return arestas / 2;
     }
 
-    @Override
-    abstract public void adicionarVertice(V vertice);
-
-    @Override
     public V getVertice(String value) {
         value = value.trim();
         final Iterator<V> vertices = getVertices();
@@ -50,8 +40,7 @@ abstract public class AbstractGrafo<V extends Vertice> implements Grafo<V> {
         return null;
     }
 
-    @Override
-    public V getVertice(Vertice value) {
+    public V getVertice(V value) {
         final Iterator<V> vertices = getVertices();
         while (vertices.hasNext()) {
             final V vertice = vertices.next();
@@ -63,7 +52,6 @@ abstract public class AbstractGrafo<V extends Vertice> implements Grafo<V> {
         return null;
     }
 
-    @Override
     public void adicionarAresta(V verticeOrigem, V verticeDestino) {
         final V verticeOrigemRef = getVertice(verticeOrigem);
         final V verticeDestinoRef = getVertice(verticeDestino);
@@ -79,5 +67,27 @@ abstract public class AbstractGrafo<V extends Vertice> implements Grafo<V> {
         adicionarArestaGrafo(verticeOrigem, verticeDestino);
     }
 
+    public boolean existVertice(V vertice) {
+        final Iterator<V> vertices = getVertices();
+
+        while (vertices.hasNext()) {
+            final V next = vertices.next();
+            if (next.equals(vertice)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    abstract public void adicionarVertice(V vertice);
+
     abstract protected void adicionarArestaGrafo(V verticeOrigem, V verticeDestino);
+
+    abstract public Iterator<V> getVerticesAdjacentes(V u);
+
+    abstract public Iterator<V> getVertices();
+
+    abstract public Iterator<Map.Entry<V, Integer>> getGrauVertices();
+
 }

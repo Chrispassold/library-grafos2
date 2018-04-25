@@ -43,17 +43,6 @@ public class GrafoListaAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
     }
 
     @Override
-    public boolean existVertice(V vertice) {
-        for (Map.Entry<V, List<V>> verticeListEntry : grafo.entrySet()) {
-            if (verticeListEntry.getKey().equals(vertice)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    @Override
     public void adicionarVertice(V vertice) {
         // verifica se o vertice ja esta no grafo
         if (!existVertice(vertice)) {

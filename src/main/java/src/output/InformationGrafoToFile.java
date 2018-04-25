@@ -1,7 +1,7 @@
 package src.output;
 
-import src.core.Grafo;
 import src.core.Vertice;
+import src.grafos.AbstractGrafo;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class InformationGrafoToFile {
 
-    public static <V extends Vertice> void toFile(Grafo<V> grafo, String destination) throws IOException, InvalidParameterException {
+    public static <V extends Vertice> void toFile(AbstractGrafo<V> grafo, String destination) throws IOException, InvalidParameterException {
         if (grafo == null) throw new InvalidParameterException("Grafo não pôde ser impresso");
 
         try (BufferedWriter out = new BufferedWriter(new FileWriter(destination))) {

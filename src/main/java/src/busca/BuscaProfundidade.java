@@ -1,17 +1,17 @@
 package src.busca;
 
 import src.core.ECor;
-import src.core.Grafo;
 import src.core.vertices.VerticeBuscaProfundidade;
+import src.grafos.AbstractGrafo;
 
 import java.util.Iterator;
 
 public class BuscaProfundidade implements Busca {
 
-    private Grafo<VerticeBuscaProfundidade> grafo;
+    private AbstractGrafo<VerticeBuscaProfundidade> grafo;
     private int tempo = 0;
 
-    public BuscaProfundidade(Grafo<VerticeBuscaProfundidade> grafo) {
+    public BuscaProfundidade(AbstractGrafo<VerticeBuscaProfundidade> grafo) {
 
         if (grafo == null) {
             throw new RuntimeException("Grafo nulo");
