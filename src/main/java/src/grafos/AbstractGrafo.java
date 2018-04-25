@@ -37,7 +37,44 @@ abstract public class AbstractGrafo<V extends Vertice> implements Grafo<V> {
     abstract public void adicionarVertice(V vertice);
 
     @Override
+    public V getVertice(String value) {
+        value = value.trim();
+        final Iterator<V> vertices = getVertices();
+        while (vertices.hasNext()) {
+            final V vertice = vertices.next();
+            if (vertice.getValor().equals(value)) {
+                return vertice;
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public V getVertice(Vertice value) {
+        final Iterator<V> vertices = getVertices();
+        while (vertices.hasNext()) {
+            final V vertice = vertices.next();
+            if (vertice.equals(value)) {
+                return vertice;
+            }
+        }
+
+        return null;
+    }
+
+    @Override
     public void adicionarAresta(V verticeOrigem, V verticeDestino) {
+        final V verticeOrigemRef = getVertice(verticeOrigem);
+        final V verticeDestinoRef = getVertice(verticeDestino);
+
+        if (verticeOrigemRef != null) {
+            verticeOrigem = verticeOrigemRef;
+        }
+
+        if (verticeDestinoRef != null) {
+            verticeDestino = verticeDestinoRef;
+        }
 
         adicionarArestaGrafo(verticeOrigem, verticeDestino);
     }

@@ -1,12 +1,12 @@
 package src.core;
 
-public enum Representacao {
+public enum ERepresentacao {
     LISTA_ADJACENCIA(0),
     MATRIZ_ADJACENCIA(1);
 
     private int representacao;
 
-    Representacao(int representacao) {
+    ERepresentacao(int representacao) {
         this.representacao = representacao;
     }
 

@@ -6,7 +6,7 @@ import src.busca.Busca;
 import src.busca.BuscaLargura;
 import src.busca.BuscaProfundidade;
 import src.core.Grafo;
-import src.core.Representacao;
+import src.core.ERepresentacao;
 import src.core.vertices.VerticeBuscaLargura;
 import src.core.vertices.VerticeBuscaProfundidade;
 import src.factory.GrafoFactory;
@@ -26,10 +26,7 @@ public class TesteBusca {
 
     @Test
     public void buscaLarguraLA() {
-        Grafo<VerticeBuscaLargura> grafo = GrafoFactory.constroiGrafo(Representacao.LISTA_ADJACENCIA, VerticeBuscaLargura.class);
-        if (grafo == null) {
-            throw new RuntimeException("Grafo nulo");
-        }
+        Grafo<VerticeBuscaLargura> grafo = GrafoFactory.constroiGrafo(ERepresentacao.LISTA_ADJACENCIA, VerticeBuscaLargura.class);
 
         //setup grafo
         grafo.setQuantidadeVertices(grafoFromFile.getQuantidadeVertices());
@@ -44,10 +41,7 @@ public class TesteBusca {
 
     @Test
     public void buscaLarguraMA() {
-        Grafo<VerticeBuscaLargura> grafo = GrafoFactory.constroiGrafo(Representacao.MATRIZ_ADJACENCIA, VerticeBuscaLargura.class);
-        if (grafo == null) {
-            throw new RuntimeException("Grafo nulo");
-        }
+        Grafo<VerticeBuscaLargura> grafo = GrafoFactory.constroiGrafo(ERepresentacao.MATRIZ_ADJACENCIA, VerticeBuscaLargura.class);
 
         //setup grafo
         grafo.setQuantidadeVertices(grafoFromFile.getQuantidadeVertices());
@@ -62,10 +56,7 @@ public class TesteBusca {
 
     @Test
     public void buscaProfundidadeLA() {
-        Grafo<VerticeBuscaProfundidade> grafo = GrafoFactory.constroiGrafo(Representacao.LISTA_ADJACENCIA, VerticeBuscaProfundidade.class);
-        if (grafo == null) {
-            throw new RuntimeException("Grafo nulo");
-        }
+        Grafo<VerticeBuscaProfundidade> grafo = GrafoFactory.constroiGrafo(ERepresentacao.LISTA_ADJACENCIA, VerticeBuscaProfundidade.class);
 
         //setup grafo
         grafo.setQuantidadeVertices(grafoFromFile.getQuantidadeVertices());
@@ -80,10 +71,7 @@ public class TesteBusca {
 
     @Test
     public void buscaProfundidadeMA() {
-        Grafo<VerticeBuscaProfundidade> grafo = GrafoFactory.constroiGrafo(Representacao.MATRIZ_ADJACENCIA, VerticeBuscaProfundidade.class);
-        if (grafo == null) {
-            throw new RuntimeException("Grafo nulo");
-        }
+        Grafo<VerticeBuscaProfundidade> grafo = GrafoFactory.constroiGrafo(ERepresentacao.MATRIZ_ADJACENCIA, VerticeBuscaProfundidade.class);
 
         //setup grafo
         grafo.setQuantidadeVertices(grafoFromFile.getQuantidadeVertices());

@@ -1,6 +1,6 @@
 package src.core;
 
-public enum Cor {
+public enum ECor {
     Preto(0, "PRETO"),
     Cinza(1, "CINZA"),
     Branco(2, "BRANCO");
@@ -8,7 +8,7 @@ public enum Cor {
     private int cor;
     private String corName;
 
-    Cor(int cor, String corName) {
+    ECor(int cor, String corName) {
         this.cor = cor;
         this.corName = corName;
     }

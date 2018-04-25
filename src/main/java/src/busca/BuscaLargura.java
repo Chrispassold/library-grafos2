@@ -1,6 +1,6 @@
 package src.busca;
 
-import src.core.Cor;
+import src.core.ECor;
 import src.core.Grafo;
 import src.core.vertices.VerticeBuscaLargura;
 
@@ -20,7 +20,7 @@ public class BuscaLargura implements Busca {
             throw new RuntimeException("Grafo nulo");
         }
 
-        if (!grafo.existVertice(verticeInicial)) {
+        if (verticeInicial == null || !grafo.existVertice(verticeInicial)) {
             throw new RuntimeException("Vertice inicial não existe no grafo informado");
         }
 
@@ -35,7 +35,7 @@ public class BuscaLargura implements Busca {
         while (vertices.hasNext()) {
             VerticeBuscaLargura next = vertices.next();
             if (!next.equals(verticeInicial)) {
-                next.setCor(Cor.Branco);
+                next.setCor(ECor.Branco);
                 next.setDistancia((int) Float.POSITIVE_INFINITY);
                 next.setPai(null);
             }
@@ -43,7 +43,7 @@ public class BuscaLargura implements Busca {
 
         verticeInicial.setDistancia(0);
         verticeInicial.setPai(null);
-        verticeInicial.setCor(Cor.Cinza);
+        verticeInicial.setCor(ECor.Cinza);
 
         listaBusca.add(verticeInicial);
     }
@@ -57,14 +57,14 @@ public class BuscaLargura implements Busca {
 
             while (verticesAdjacentes.hasNext()) {
                 VerticeBuscaLargura it = verticesAdjacentes.next();
-                if (it.getCor().equals(Cor.Branco)) {
-                    it.setCor(Cor.Cinza);
+                if (it.getCor().equals(ECor.Branco)) {
+                    it.setCor(ECor.Cinza);
                     it.setDistancia(removido.getDistancia() + 1);
                     it.setPai(removido);
                     listaBusca.add(it);
                 }
             }
-            removido.setCor(Cor.Preto);
+            removido.setCor(ECor.Preto);
         }
 
     }

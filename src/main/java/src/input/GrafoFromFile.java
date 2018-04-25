@@ -5,9 +5,9 @@ import src.exception.InvalidFormatFileException;
 import java.io.*;
 import java.util.*;
 
-public class GrafoFromFile {
-    private List<String> _vertices = new ArrayList<>();
-    private Map<String, List<String>> _arestas = new HashMap<>();
+public class GrafoFromFile{
+    private Set<String> _vertices = new HashSet<>();
+    private Map<String, Set<String>> _arestas = new HashMap<>();
     private int _quantidadeVertices = 0;
 
     public GrafoFromFile(String arquivo) throws IOException {
@@ -50,20 +50,13 @@ public class GrafoFromFile {
     }
 
     private void addAdjacente(String origem, String destino) {
-        if (!_vertices.contains(origem)) {
-            _vertices.add(origem);
-        }
+        _vertices.add(origem);
+        _vertices.add(destino);
 
-        if (!_vertices.contains(destino)) {
-            _vertices.add(destino);
-        }
+        Set<String> adjacentes = _arestas.getOrDefault(origem, new HashSet<>());
 
-        List<String> adjacentes = _arestas.getOrDefault(origem, new ArrayList<>());
-
-        if (!adjacentes.contains(destino)) {
-            adjacentes.add(destino);
-            _arestas.put(origem, adjacentes);
-        }
+        adjacentes.add(destino);
+        _arestas.put(origem, adjacentes);
 
     }
 
@@ -73,7 +66,7 @@ public class GrafoFromFile {
     }
 
     public Iterator<String> getAdjacentes(String vertice) {
-        return _arestas.getOrDefault(vertice, new ArrayList<>()).iterator();
+        return _arestas.getOrDefault(vertice, new HashSet<>()).iterator();
     }
 
     public int getQuantidadeVertices() {

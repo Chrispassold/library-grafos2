@@ -1,6 +1,6 @@
 package src.busca;
 
-import src.core.Cor;
+import src.core.ECor;
 import src.core.Grafo;
 import src.core.vertices.VerticeBuscaProfundidade;
 
@@ -25,7 +25,7 @@ public class BuscaProfundidade implements Busca {
         final Iterator<VerticeBuscaProfundidade> vertices = grafo.getVertices();
         while (vertices.hasNext()) {
             final VerticeBuscaProfundidade vertice = vertices.next();
-            vertice.setCor(Cor.Branco);
+            vertice.setCor(ECor.Branco);
             vertice.setPai(null);
         }
     }
@@ -35,7 +35,7 @@ public class BuscaProfundidade implements Busca {
         final Iterator<VerticeBuscaProfundidade> vertices = grafo.getVertices();
         while (vertices.hasNext()) {
             final VerticeBuscaProfundidade vertice = vertices.next();
-            if (vertice.getCor().equals(Cor.Branco)) {
+            if (vertice.getCor().equals(ECor.Branco)) {
                 DFS(vertice);
             }
         }
@@ -44,19 +44,19 @@ public class BuscaProfundidade implements Busca {
     private void DFS(VerticeBuscaProfundidade vertice) {
         this.tempo++;
         vertice.setTempoDescoberta(tempo);
-        vertice.setCor(Cor.Cinza);
+        vertice.setCor(ECor.Cinza);
 
         Iterator<VerticeBuscaProfundidade> it = grafo.getVerticesAdjacentes(vertice);
         while (it.hasNext()) {
             VerticeBuscaProfundidade v = it.next();
 
-            if (v.getCor().equals(Cor.Branco)) {
+            if (v.getCor().equals(ECor.Branco)) {
                 v.setPai(vertice);
                 DFS(v);
             }
         }
 
-        vertice.setCor(Cor.Preto);
+        vertice.setCor(ECor.Preto);
         this.tempo++;
         vertice.setTempoFinalizacao(tempo);
     }

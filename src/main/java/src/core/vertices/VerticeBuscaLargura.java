@@ -1,11 +1,11 @@
 package src.core.vertices;
 
-import src.core.Cor;
+import src.core.ECor;
 import src.core.Vertice;
 
 public class VerticeBuscaLargura extends Vertice {
 
-    private Cor cor = Cor.Branco;
+    private ECor cor = ECor.Branco;
     private int distancia = (int) Float.POSITIVE_INFINITY;
     private VerticeBuscaLargura pai = null;
 
@@ -19,11 +19,11 @@ public class VerticeBuscaLargura extends Vertice {
         super(valor);
     }
 
-    public Cor getCor() {
+    public ECor getCor() {
         return cor;
     }
 
-    public void setCor(Cor cor) {
+    public void setCor(ECor cor) {
         this.cor = cor;
     }
 

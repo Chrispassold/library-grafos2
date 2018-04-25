@@ -9,6 +9,10 @@ public interface Grafo<V extends Vertice> {
 
     Iterator<V> getVertices();
 
+    V getVertice(String value);
+
+    V getVertice(V vertice);
+
     void setQuantidadeVertices(int quantidadeVertices);
 
     int getQuantidadeVertices();
