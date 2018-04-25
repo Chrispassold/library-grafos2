@@ -63,8 +63,13 @@ public class GrafoMatrizAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
             Iterator<V> verticesAdjacentes = getVerticesAdjacentes(vertice);
             int qntAdjacentes = 0;
             while (verticesAdjacentes.hasNext()) {
-                verticesAdjacentes.next();
-                qntAdjacentes++;
+                final V verticeAdj = verticesAdjacentes.next();
+
+                if (verticeAdj.equals(vertice)) {
+                    qntAdjacentes += 1;
+                }
+
+                qntAdjacentes += 1;
             }
 
             grau.put(vertice, qntAdjacentes);
