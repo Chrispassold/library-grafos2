@@ -2,6 +2,7 @@ package src.grafos;
 
 import src.core.Vertice;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -80,6 +81,29 @@ abstract public class AbstractGrafo<V extends Vertice> {
         return false;
     }
 
+    public Iterator<Map.Entry<V, Integer>> getGrauVertices() {
+        Map<V, Integer> grau = new HashMap<>();
+        final Iterator<V> vertices = getVertices();
+
+        vertices.forEachRemaining(vertice -> {
+            final Iterator<V> verticesAdjacentes = getVerticesAdjacentes(vertice);
+            int qntAdjacentes = 0;
+            while (verticesAdjacentes.hasNext()) {
+                final V verticeAdj = verticesAdjacentes.next();
+
+                if (verticeAdj.equals(vertice)) {
+                    qntAdjacentes += 1;
+                }
+
+                qntAdjacentes += 1;
+            }
+
+            grau.put(vertice, qntAdjacentes);
+        });
+
+        return grau.entrySet().iterator();
+    }
+
     abstract public void adicionarVertice(V vertice);
 
     abstract protected void adicionarArestaGrafo(V verticeOrigem, V verticeDestino);
@@ -87,7 +111,5 @@ abstract public class AbstractGrafo<V extends Vertice> {
     abstract public Iterator<V> getVerticesAdjacentes(V u);
 
     abstract public Iterator<V> getVertices();
-
-    abstract public Iterator<Map.Entry<V, Integer>> getGrauVertices();
 
 }

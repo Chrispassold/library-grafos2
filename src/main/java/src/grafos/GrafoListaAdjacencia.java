@@ -22,27 +22,6 @@ public class GrafoListaAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
     }
 
     @Override
-    public Iterator<Map.Entry<V, Integer>> getGrauVertices() {
-        HashMap<V, Integer> grau = new HashMap<>();
-
-        grafo.forEach((vertice, adj) -> {
-            int grauVertice = 0;
-            for (V verticeAdj : adj) {
-                //Loop
-                if (verticeAdj.equals(vertice)) {
-                    grauVertice += 1;
-                }
-
-                grauVertice += 1;
-            }
-
-            grau.put(vertice, grauVertice);
-        });
-
-        return grau.entrySet().iterator();
-    }
-
-    @Override
     public void adicionarVertice(V vertice) {
         // verifica se o vertice ja esta no grafo
         if (!existVertice(vertice)) {

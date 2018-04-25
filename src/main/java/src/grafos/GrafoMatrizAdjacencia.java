@@ -56,34 +56,10 @@ public class GrafoMatrizAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
     }
 
     @Override
-    public Iterator<Map.Entry<V, Integer>> getGrauVertices() {
-        HashMap<V, Integer> grau = new HashMap<>();
-        VertToInt.forEach((vertice, adj) -> {
-
-            Iterator<V> verticesAdjacentes = getVerticesAdjacentes(vertice);
-            int qntAdjacentes = 0;
-            while (verticesAdjacentes.hasNext()) {
-                final V verticeAdj = verticesAdjacentes.next();
-
-                if (verticeAdj.equals(vertice)) {
-                    qntAdjacentes += 1;
-                }
-
-                qntAdjacentes += 1;
-            }
-
-            grau.put(vertice, qntAdjacentes);
-        });
-
-        return grau.entrySet().iterator();
-    }
-
-    @Override
     public void adicionarVertice(V vertice) {
         if (!existVertice(vertice)) {
             mapeiaVertice(vertice);
         }
-
     }
 
     @Override
