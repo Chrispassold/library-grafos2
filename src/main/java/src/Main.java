@@ -12,6 +12,7 @@ import src.core.vertices.VerticeBuscaProfundidade;
 import src.factory.GrafoFactory;
 import src.input.GrafoFromConsole;
 import src.input.GrafoFromFile;
+import src.output.InformationGrafoToFile;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,7 +20,7 @@ import java.io.InputStreamReader;
 import java.util.Iterator;
 
 public class Main {
-    static GrafoFromConsole grafoFromConsole;
+    private static GrafoFromConsole grafoFromConsole;
 
     public static void main(String[] args) {
         grafoFromConsole = new GrafoFromConsole();
@@ -53,9 +54,8 @@ public class Main {
         }
     }
 
-    public static void buscaLargura() throws IOException {
+    private static void buscaLargura() throws IOException {
         final Grafo<VerticeBuscaLargura> grafo = GrafoFactory.constroiGrafo(grafoFromConsole.getRepresentacao(), VerticeBuscaLargura.class);
-
         GrafoFromFile grafoFromFile = new GrafoFromFile(grafoFromConsole.getPath());
 
         //setup grafo
@@ -65,12 +65,14 @@ public class Main {
             adjacentes.forEachRemaining(destino -> grafo.adicionarAresta(new VerticeBuscaLargura(origem), new VerticeBuscaLargura(destino)));
         });
 
+        grafoToFile(grafo);
+
         Busca buscaLargura = new BuscaLargura(grafo, grafo.getVertice(grafoFromConsole.getVerticeInicial()));
         buscaLargura.execute();
 
     }
 
-    public static void buscaProfundidade() throws IOException {
+    private static void buscaProfundidade() throws IOException {
         final Grafo<VerticeBuscaProfundidade> grafo = GrafoFactory.constroiGrafo(grafoFromConsole.getRepresentacao(), VerticeBuscaProfundidade.class);
 
         GrafoFromFile grafoFromFile = new GrafoFromFile(grafoFromConsole.getPath());
@@ -82,7 +84,13 @@ public class Main {
             adjacentes.forEachRemaining(destino -> grafo.adicionarAresta(new VerticeBuscaProfundidade(origem), new VerticeBuscaProfundidade(destino)));
         });
 
+        grafoToFile(grafo);
+
         Busca buscaLargura = new BuscaProfundidade(grafo);
         buscaLargura.execute();
+    }
+
+    private static  <V extends Vertice> void grafoToFile(Grafo<V> grafo) throws IOException {
+        InformationGrafoToFile.toFile(grafo, "grafo.out");
     }
 }
