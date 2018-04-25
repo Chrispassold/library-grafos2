@@ -65,7 +65,7 @@ public class Main {
             adjacentes.forEachRemaining(destino -> grafo.adicionarAresta(new VerticeBuscaLargura(origem), new VerticeBuscaLargura(destino)));
         });
 
-        grafoToFile(grafo);
+        grafoInformationToFile(grafo);
 
         Busca buscaLargura = new BuscaLargura(grafo, grafo.getVertice(grafoFromConsole.getVerticeInicial()));
         buscaLargura.execute();
@@ -84,13 +84,13 @@ public class Main {
             adjacentes.forEachRemaining(destino -> grafo.adicionarAresta(new VerticeBuscaProfundidade(origem), new VerticeBuscaProfundidade(destino)));
         });
 
-        grafoToFile(grafo);
+        grafoInformationToFile(grafo);
 
         Busca buscaLargura = new BuscaProfundidade(grafo);
         buscaLargura.execute();
     }
 
-    private static  <V extends Vertice> void grafoToFile(Grafo<V> grafo) throws IOException {
+    private static  <V extends Vertice> void grafoInformationToFile(Grafo<V> grafo) throws IOException {
         InformationGrafoToFile.toFile(grafo, "grafo.out");
     }
 }
