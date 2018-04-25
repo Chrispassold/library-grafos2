@@ -26,7 +26,17 @@ public class GrafoListaAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
         HashMap<V, Integer> grau = new HashMap<>();
 
         grafo.forEach((vertice, adj) -> {
-            grau.put(vertice, adj.size());
+            int grauVertice = 0;
+            for (V verticeAdj : adj) {
+                //Loop
+                if (verticeAdj.equals(vertice)) {
+                    grauVertice += 1;
+                }
+
+                grauVertice += 1;
+            }
+
+            grau.put(vertice, grauVertice);
         });
 
         return grau.entrySet().iterator();

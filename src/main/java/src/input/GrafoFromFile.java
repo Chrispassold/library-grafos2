@@ -22,7 +22,7 @@ public class GrafoFromFile{
             boolean firstLine = true;
             while ((line = leitor.readLine()) != null) {
 
-                String[] lineValues = line.split("[^\\d.]");
+                String[] lineValues = line.split("[\\s+]");
 
                 if (firstLine) {
 
