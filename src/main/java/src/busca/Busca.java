@@ -3,5 +3,5 @@ package src.busca;
 public interface Busca {
     void execute();
 
-    void imprimir();
+    void imprimir(String destination);
 }

@@ -4,6 +4,9 @@ import src.core.ECor;
 import src.core.vertices.VerticeBuscaLargura;
 import src.grafos.AbstractGrafo;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -66,25 +69,33 @@ public class BuscaLargura implements Busca {
             }
             removido.setCor(ECor.Preto);
         }
-
-        imprimir();
-
     }
 
     @Override
-    public void imprimir() {
-        System.out.println("--- BUSCA LARGURA ----");
-        System.out.println("Pai\tVertice\tDistancia");
-        final String format = "%s\t%s\t%d";
+    public void imprimir(String destination) {
 
-        grafo.getVertices().forEachRemaining(verticeBuscaLargura -> {
-            System.out.printf(format,
-                    verticeBuscaLargura.getPai() != null ? verticeBuscaLargura.getPai().getValor() : ".",
-                    verticeBuscaLargura.getValor(),
-                    verticeBuscaLargura.getDistancia()
-            );
-            System.out.println();
-        });
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(destination))) {
+            bufferedWriter.write("--- BUSCA LARGURA ----");
+            bufferedWriter.newLine();
+            bufferedWriter.write("Pai\tVertice\tDistancia");
+            bufferedWriter.newLine();
+            final String format = "%s\t%s\t%d";
+
+            final Iterator<VerticeBuscaLargura> vertices = grafo.getVertices();
+
+            while (vertices.hasNext()) {
+                final VerticeBuscaLargura verticeBuscaLargura = vertices.next();
+                bufferedWriter.write(String.format(format,
+                        verticeBuscaLargura.getPai() != null ? verticeBuscaLargura.getPai().getValor() : ".",
+                        verticeBuscaLargura.getValor(),
+                        verticeBuscaLargura.getDistancia()));
+                bufferedWriter.newLine();
+            }
+
+        } catch (IOException e) {
+            System.out.println("Não foi possivel criar arquivo da busca");
+            e.printStackTrace();
+        }
     }
 
 }

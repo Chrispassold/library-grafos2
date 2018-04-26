@@ -54,7 +54,7 @@ abstract public class AbstractGrafo<V extends Vertice> {
     }
 
     public void adicionarAresta(V verticeOrigem, V verticeDestino) {
-        if(verticeOrigem == null){
+        if (verticeOrigem == null) {
             throw new RuntimeException("Não é possível adicionar um vertice, pois o vertice origem se encontra nulo");
         }
 

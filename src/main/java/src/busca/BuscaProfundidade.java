@@ -4,6 +4,9 @@ import src.core.ECor;
 import src.core.vertices.VerticeBuscaProfundidade;
 import src.grafos.AbstractGrafo;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Iterator;
 
 public class BuscaProfundidade implements Busca {
@@ -41,24 +44,6 @@ public class BuscaProfundidade implements Busca {
                 DFS(vertice);
             }
         }
-
-        imprimir();
-    }
-
-    @Override
-    public void imprimir() {
-        System.out.println("--- BUSCA PROFUNDIDADE ----");
-        System.out.println("Pai\tVertice\tAberto\tFechado");
-        final String format = "%s\t%s\t%d\t%d";
-        grafo.getVertices().forEachRemaining(verticeBuscaProfundidade -> {
-            System.out.printf(format,
-                    verticeBuscaProfundidade.getPai() != null ? verticeBuscaProfundidade.getPai().getValor() : ".",
-                    verticeBuscaProfundidade.getValor(),
-                    verticeBuscaProfundidade.getTempoDescoberta(),
-                    verticeBuscaProfundidade.getTempoFinalizacao()
-            );
-            System.out.println();
-        });
     }
 
     private void DFS(VerticeBuscaProfundidade vertice) {
@@ -79,5 +64,33 @@ public class BuscaProfundidade implements Busca {
         vertice.setCor(ECor.Preto);
         this.tempo = this.tempo + 1;
         vertice.setTempoFinalizacao(tempo);
+    }
+
+    @Override
+    public void imprimir(String destination) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(destination))) {
+            bufferedWriter.write("--- BUSCA PROFUNDIDADE ----");
+            bufferedWriter.newLine();
+            bufferedWriter.write("Pai\tVertice\tAberto\tFechado");
+            bufferedWriter.newLine();
+            final String format = "%s\t%s\t%d\t%d";
+
+            final Iterator<VerticeBuscaProfundidade> vertices = grafo.getVertices();
+
+            while (vertices.hasNext()) {
+                final VerticeBuscaProfundidade verticeBuscaProfundidade = vertices.next();
+                bufferedWriter.write(String.format(format,
+                        verticeBuscaProfundidade.getPai() != null ? verticeBuscaProfundidade.getPai().getValor() : ".",
+                        verticeBuscaProfundidade.getValor(),
+                        verticeBuscaProfundidade.getTempoDescoberta(),
+                        verticeBuscaProfundidade.getTempoFinalizacao()
+                ));
+                bufferedWriter.newLine();
+            }
+
+        } catch (IOException e) {
+            System.out.println("Não foi possivel criar arquivo da busca");
+            e.printStackTrace();
+        }
     }
 }

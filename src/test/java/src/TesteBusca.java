@@ -38,6 +38,7 @@ public class TesteBusca {
 
         Busca buscaLargura = new BuscaLargura(grafo, new VerticeBuscaLargura("A"));
         buscaLargura.execute();
+        buscaLargura.imprimir("print_buscaLarguraLA.out");
     }
 
     @Test
@@ -54,6 +55,7 @@ public class TesteBusca {
 
         Busca buscaLargura = new BuscaLargura(grafo, new VerticeBuscaLargura("A"));
         buscaLargura.execute();
+        buscaLargura.imprimir("print_buscaLarguraMA.out");
     }
 
     @Test
@@ -68,8 +70,9 @@ public class TesteBusca {
             adjacentes.forEachRemaining(destino -> grafo.adicionarAresta(new VerticeBuscaProfundidade(origem), new VerticeBuscaProfundidade(destino)));
         });
 
-        Busca buscaLargura = new BuscaProfundidade(grafo);
-        buscaLargura.execute();
+        Busca buscaProfundidade = new BuscaProfundidade(grafo);
+        buscaProfundidade.execute();
+        buscaProfundidade.imprimir("print_buscaProfundidadeLA.out");
     }
 
     @Test
@@ -84,7 +87,8 @@ public class TesteBusca {
             adjacentes.forEachRemaining(destino -> grafo.adicionarAresta(new VerticeBuscaProfundidade(origem), new VerticeBuscaProfundidade(destino)));
         });
 
-        Busca buscaLargura = new BuscaProfundidade(grafo);
-        buscaLargura.execute();
+        Busca buscaProfundidade = new BuscaProfundidade(grafo);
+        buscaProfundidade.execute();
+        buscaProfundidade.imprimir("print_buscaProfundidadeMA.out");
     }
 }
