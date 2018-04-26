@@ -54,6 +54,10 @@ abstract public class AbstractGrafo<V extends Vertice> {
     }
 
     public void adicionarAresta(V verticeOrigem, V verticeDestino) {
+        if(verticeOrigem == null){
+            throw new RuntimeException("Não é possível adicionar um vertice, pois o vertice origem se encontra nulo");
+        }
+
         final V verticeOrigemRef = getVertice(verticeOrigem);
         final V verticeDestinoRef = getVertice(verticeDestino);
 
@@ -64,6 +68,9 @@ abstract public class AbstractGrafo<V extends Vertice> {
         if (verticeDestinoRef != null) {
             verticeDestino = verticeDestinoRef;
         }
+
+        adicionarVertice(verticeOrigem);
+        adicionarVertice(verticeDestino);
 
         adicionarArestaGrafo(verticeOrigem, verticeDestino);
     }
@@ -104,9 +111,9 @@ abstract public class AbstractGrafo<V extends Vertice> {
         return grau.entrySet().iterator();
     }
 
-    abstract public void adicionarVertice(V vertice);
-
     abstract protected void adicionarArestaGrafo(V verticeOrigem, V verticeDestino);
+
+    abstract public void adicionarVertice(V vertice);
 
     abstract public Iterator<V> getVerticesAdjacentes(V u);
 

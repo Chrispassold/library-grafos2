@@ -23,7 +23,6 @@ public class GrafoListaAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
 
     @Override
     public void adicionarVertice(V vertice) {
-        // verifica se o vertice ja esta no grafo
         if (!existVertice(vertice)) {
             grafo.put(vertice, new ArrayList<>());
         }
@@ -32,19 +31,15 @@ public class GrafoListaAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
 
     @Override
     protected void adicionarArestaGrafo(V verticeOrigem, V verticeDestino) {
+        adicionarAdjacencia(verticeOrigem, verticeDestino);
+    }
 
-        if (verticeOrigem == null) {
-            throw new RuntimeException("Não é possível adicionar um vertice, pois o vertice origem se encontra nulo");
-        }
-
-        adicionarVertice(verticeOrigem);
-
+    private void adicionarAdjacencia(V verticeOrigem, V verticeDestino){
         if (verticeDestino != null) {
             final List<V> adj = grafo.get(verticeOrigem);
             adj.add(verticeDestino);
 
             grafo.put(verticeOrigem, adj);
         }
-
     }
 }

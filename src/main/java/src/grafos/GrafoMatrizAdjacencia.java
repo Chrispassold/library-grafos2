@@ -64,14 +64,14 @@ public class GrafoMatrizAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
 
     @Override
     protected void adicionarArestaGrafo(V verticeOrigem, V verticeDestino) {
-        adicionarVertice(verticeOrigem);
-        adicionarVertice(verticeDestino);
+        if (verticeOrigem == null) {
+            throw new RuntimeException("Não é possível adicionar um vertice, pois o vertice origem se encontra nulo");
+        }
+
         adicionaAdjacencia(verticeOrigem, verticeDestino);
     }
 
     private void adicionaAdjacencia(V verticeOrigem, V verticeDestino) {
-        if (existVertice(verticeOrigem) && existVertice(verticeDestino)) {
-            this._matrizAdj[this.VertToInt.get(verticeOrigem)][this.VertToInt.get(verticeDestino)] = 1;
-        }
+        this._matrizAdj[this.VertToInt.get(verticeOrigem)][this.VertToInt.get(verticeDestino)] = 1;
     }
 }

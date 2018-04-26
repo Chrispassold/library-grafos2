@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * Classe que representa um vértice do grafo.
  */
-public class Vertice {
+abstract public class Vertice {
     private String valor;
 
     /**
