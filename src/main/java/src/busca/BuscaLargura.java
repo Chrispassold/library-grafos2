@@ -25,7 +25,7 @@ public class BuscaLargura implements Busca {
         }
 
         this.grafo = grafo;
-        this.verticeInicial = verticeInicial;
+        this.verticeInicial = grafo.getVertice(verticeInicial);
 
         inicializaGrafo();
     }
@@ -74,13 +74,13 @@ public class BuscaLargura implements Busca {
     @Override
     public void imprimir() {
         System.out.println("--- BUSCA LARGURA ----");
-        System.out.println("Vertice\tPai\tDistancia");
+        System.out.println("Pai\tVertice\tDistancia");
         final String format = "%s\t%s\t%d";
 
         grafo.getVertices().forEachRemaining(verticeBuscaLargura -> {
             System.out.printf(format,
-                    verticeBuscaLargura.getValor(),
                     verticeBuscaLargura.getPai() != null ? verticeBuscaLargura.getPai().getValor() : ".",
+                    verticeBuscaLargura.getValor(),
                     verticeBuscaLargura.getDistancia()
             );
             System.out.println();

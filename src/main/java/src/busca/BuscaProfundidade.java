@@ -48,12 +48,12 @@ public class BuscaProfundidade implements Busca {
     @Override
     public void imprimir() {
         System.out.println("--- BUSCA PROFUNDIDADE ----");
-        System.out.println("Vertice\tPai\tAberto\tFechado");
+        System.out.println("Pai\tVertice\tAberto\tFechado");
         final String format = "%s\t%s\t%d\t%d";
         grafo.getVertices().forEachRemaining(verticeBuscaProfundidade -> {
             System.out.printf(format,
-                    verticeBuscaProfundidade.getValor(),
                     verticeBuscaProfundidade.getPai() != null ? verticeBuscaProfundidade.getPai().getValor() : ".",
+                    verticeBuscaProfundidade.getValor(),
                     verticeBuscaProfundidade.getTempoDescoberta(),
                     verticeBuscaProfundidade.getTempoFinalizacao()
             );
@@ -62,7 +62,7 @@ public class BuscaProfundidade implements Busca {
     }
 
     private void DFS(VerticeBuscaProfundidade vertice) {
-        this.tempo++;
+        this.tempo = this.tempo + 1;
         vertice.setTempoDescoberta(tempo);
         vertice.setCor(ECor.Cinza);
 
@@ -77,7 +77,7 @@ public class BuscaProfundidade implements Busca {
         }
 
         vertice.setCor(ECor.Preto);
-        this.tempo++;
+        this.tempo = this.tempo + 1;
         vertice.setTempoFinalizacao(tempo);
     }
 }

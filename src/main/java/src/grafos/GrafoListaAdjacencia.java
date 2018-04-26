@@ -5,7 +5,7 @@ import src.core.Vertice;
 import java.util.*;
 
 public class GrafoListaAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
-    private Map<V, List<V>> grafo = new HashMap<>();
+    private Map<V, Set<V>> grafo = new HashMap<>();
 
     @Override
     public Iterator<V> getVerticesAdjacentes(V vertice) {
@@ -24,7 +24,7 @@ public class GrafoListaAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
     @Override
     public void adicionarVertice(V vertice) {
         if (!existVertice(vertice)) {
-            grafo.put(vertice, new ArrayList<>());
+            grafo.put(vertice, new HashSet<>());
         }
 
     }
@@ -36,7 +36,7 @@ public class GrafoListaAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
 
     private void adicionarAdjacencia(V verticeOrigem, V verticeDestino){
         if (verticeDestino != null) {
-            final List<V> adj = grafo.get(verticeOrigem);
+            final Set<V> adj = grafo.get(verticeOrigem);
             adj.add(verticeDestino);
 
             grafo.put(verticeOrigem, adj);
