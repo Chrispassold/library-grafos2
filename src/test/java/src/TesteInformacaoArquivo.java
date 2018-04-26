@@ -8,7 +8,7 @@ import src.core.vertices.VerticeBuscaProfundidade;
 import src.factory.GrafoFactory;
 import src.grafos.AbstractGrafo;
 import src.input.GrafoFromFile;
-import src.output.InformationGrafoToFile;
+import src.output.InformacaoToArquivo;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -34,7 +34,7 @@ public class TesteInformacaoArquivo {
             adjacentes.forEachRemaining(destino -> grafo.adicionarAresta(new VerticeBuscaLargura(origem), new VerticeBuscaLargura(destino)));
         });
 
-        InformationGrafoToFile.toFile(grafo, "InformationGrafoToFileLABL.out");
+        InformacaoToArquivo.toFile(grafo, "InformationGrafoToFileLABL.out");
     }
 
     @Test
@@ -49,7 +49,7 @@ public class TesteInformacaoArquivo {
             adjacentes.forEachRemaining(destino -> grafo.adicionarAresta(new VerticeBuscaLargura(origem), new VerticeBuscaLargura(destino)));
         });
 
-        InformationGrafoToFile.toFile(grafo, "InformationGrafoToFileMABL.out");
+        InformacaoToArquivo.toFile(grafo, "InformationGrafoToFileMABL.out");
     }
 
     @Test
@@ -64,7 +64,7 @@ public class TesteInformacaoArquivo {
             adjacentes.forEachRemaining(destino -> grafo.adicionarAresta(new VerticeBuscaProfundidade(origem), new VerticeBuscaProfundidade(destino)));
         });
 
-        InformationGrafoToFile.toFile(grafo, "InformationGrafoToFileLABP.out");
+        InformacaoToArquivo.toFile(grafo, "InformationGrafoToFileLABP.out");
     }
 
     @Test
@@ -79,6 +79,6 @@ public class TesteInformacaoArquivo {
             adjacentes.forEachRemaining(destino -> grafo.adicionarAresta(new VerticeBuscaProfundidade(origem), new VerticeBuscaProfundidade(destino)));
         });
 
-        InformationGrafoToFile.toFile(grafo, "InformationGrafoToFileMABP.out");
+        InformacaoToArquivo.toFile(grafo, "InformationGrafoToFileMABP.out");
     }
 }

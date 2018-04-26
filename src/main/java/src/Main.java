@@ -12,7 +12,7 @@ import src.factory.GrafoFactory;
 import src.grafos.AbstractGrafo;
 import src.input.GrafoFromConsole;
 import src.input.GrafoFromFile;
-import src.output.InformationGrafoToFile;
+import src.output.InformacaoToArquivo;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -91,6 +91,6 @@ public class Main {
     }
 
     private static <V extends Vertice> void grafoInformationToFile(AbstractGrafo<V> grafo) throws IOException {
-        InformationGrafoToFile.toFile(grafo, "grafo.out");
+        InformacaoToArquivo.toFile(grafo, "grafo.out");
     }
 }

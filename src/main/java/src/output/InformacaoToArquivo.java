@@ -10,7 +10,7 @@ import java.security.InvalidParameterException;
 import java.util.Iterator;
 import java.util.Map;
 
-public class InformationGrafoToFile {
+public class InformacaoToArquivo {
 
     public static <V extends Vertice> void toFile(AbstractGrafo<V> grafo, String destination) throws IOException, InvalidParameterException {
         if (grafo == null) throw new InvalidParameterException("Grafo não pôde ser impresso");
