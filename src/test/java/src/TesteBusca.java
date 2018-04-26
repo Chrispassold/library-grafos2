@@ -26,6 +26,7 @@ public class TesteBusca {
 
     @Test
     public void buscaLarguraLA() {
+        System.out.println("--- buscaLarguraLA ----");
         AbstractGrafo<VerticeBuscaLargura> grafo = GrafoFactory.constroiGrafo(ERepresentacao.LISTA_ADJACENCIA, VerticeBuscaLargura.class);
 
         //setup grafo
@@ -41,6 +42,7 @@ public class TesteBusca {
 
     @Test
     public void buscaLarguraMA() {
+        System.out.println("--- buscaLarguraMA ----");
         AbstractGrafo<VerticeBuscaLargura> grafo = GrafoFactory.constroiGrafo(ERepresentacao.MATRIZ_ADJACENCIA, VerticeBuscaLargura.class);
 
         //setup grafo
@@ -56,6 +58,7 @@ public class TesteBusca {
 
     @Test
     public void buscaProfundidadeLA() {
+        System.out.println("--- buscaProfundidadeLA ----");
         AbstractGrafo<VerticeBuscaProfundidade> grafo = GrafoFactory.constroiGrafo(ERepresentacao.LISTA_ADJACENCIA, VerticeBuscaProfundidade.class);
 
         //setup grafo
@@ -71,6 +74,7 @@ public class TesteBusca {
 
     @Test
     public void buscaProfundidadeMA() {
+        System.out.println("--- buscaProfundidadeMA ----");
         AbstractGrafo<VerticeBuscaProfundidade> grafo = GrafoFactory.constroiGrafo(ERepresentacao.MATRIZ_ADJACENCIA, VerticeBuscaProfundidade.class);
 
         //setup grafo

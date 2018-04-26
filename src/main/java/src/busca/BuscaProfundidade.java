@@ -47,6 +47,7 @@ public class BuscaProfundidade implements Busca {
 
     @Override
     public void imprimir() {
+        System.out.println("--- BUSCA PROFUNDIDADE ----");
         System.out.println("Vertice\tPai\tAberto\tFechado");
         final String format = "%s\t%s\t%d\t%d";
         grafo.getVertices().forEachRemaining(verticeBuscaProfundidade -> {

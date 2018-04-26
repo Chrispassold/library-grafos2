@@ -67,11 +67,24 @@ public class BuscaLargura implements Busca {
             removido.setCor(ECor.Preto);
         }
 
+        imprimir();
+
     }
 
     @Override
     public void imprimir() {
+        System.out.println("--- BUSCA LARGURA ----");
+        System.out.println("Vertice\tPai\tDistancia");
+        final String format = "%s\t%s\t%d";
 
+        grafo.getVertices().forEachRemaining(verticeBuscaLargura -> {
+            System.out.printf(format,
+                    verticeBuscaLargura.getValor(),
+                    verticeBuscaLargura.getPai() != null ? verticeBuscaLargura.getPai().getValor() : ".",
+                    verticeBuscaLargura.getDistancia()
+            );
+            System.out.println();
+        });
     }
 
 }
