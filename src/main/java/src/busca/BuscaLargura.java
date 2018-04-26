@@ -69,4 +69,9 @@ public class BuscaLargura implements Busca {
 
     }
 
+    @Override
+    public void imprimir() {
+
+    }
+
 }

@@ -11,6 +11,8 @@ public class BuscaProfundidade implements Busca {
     private AbstractGrafo<VerticeBuscaProfundidade> grafo;
     private int tempo = 0;
 
+    //impressao
+
     public BuscaProfundidade(AbstractGrafo<VerticeBuscaProfundidade> grafo) {
 
         if (grafo == null) {
@@ -39,6 +41,23 @@ public class BuscaProfundidade implements Busca {
                 DFS(vertice);
             }
         }
+
+        imprimir();
+    }
+
+    @Override
+    public void imprimir() {
+        System.out.println("Vertice\tPai\tAberto\tFechado");
+        final String format = "%s\t%s\t%d\t%d";
+        grafo.getVertices().forEachRemaining(verticeBuscaProfundidade -> {
+            System.out.printf(format,
+                    verticeBuscaProfundidade.getValor(),
+                    verticeBuscaProfundidade.getPai() != null ? verticeBuscaProfundidade.getPai().getValor() : ".",
+                    verticeBuscaProfundidade.getTempoDescoberta(),
+                    verticeBuscaProfundidade.getTempoFinalizacao()
+            );
+            System.out.println();
+        });
     }
 
     private void DFS(VerticeBuscaProfundidade vertice) {
