@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class BuscaLargura implements Busca {
+public class BuscaLargura extends AbstractBusca {
 
     private AbstractGrafo<VerticeBuscaLargura> grafo;
     private VerticeBuscaLargura verticeInicial;
@@ -53,6 +53,7 @@ public class BuscaLargura implements Busca {
 
     @Override
     public void execute() {
+        initializeTimeExecution();
 
         while (!listaBusca.isEmpty()) {
             VerticeBuscaLargura removido = listaBusca.remove(0);
@@ -69,6 +70,8 @@ public class BuscaLargura implements Busca {
             }
             removido.setCor(ECor.Preto);
         }
+
+        finalizeTimeExecution();
     }
 
     @Override
@@ -76,6 +79,8 @@ public class BuscaLargura implements Busca {
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(destination))) {
             bufferedWriter.write("--- BUSCA LARGURA ----");
+            bufferedWriter.newLine();
+            bufferedWriter.write(String.format("Tempo de execução: %s milisegundos", getExecutionTime()));
             bufferedWriter.newLine();
             bufferedWriter.write("Pai\tVertice\tDistancia");
             bufferedWriter.newLine();

@@ -9,12 +9,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
 
-public class BuscaProfundidade implements Busca {
+public class BuscaProfundidade extends AbstractBusca {
 
     private AbstractGrafo<VerticeBuscaProfundidade> grafo;
     private int tempo = 0;
-
-    //impressao
 
     public BuscaProfundidade(AbstractGrafo<VerticeBuscaProfundidade> grafo) {
 
@@ -37,6 +35,7 @@ public class BuscaProfundidade implements Busca {
 
     @Override
     public void execute() {
+        initializeTimeExecution();
         final Iterator<VerticeBuscaProfundidade> vertices = grafo.getVertices();
         while (vertices.hasNext()) {
             final VerticeBuscaProfundidade vertice = vertices.next();
@@ -44,6 +43,7 @@ public class BuscaProfundidade implements Busca {
                 DFS(vertice);
             }
         }
+        finalizeTimeExecution();
     }
 
     private void DFS(VerticeBuscaProfundidade vertice) {
@@ -70,6 +70,8 @@ public class BuscaProfundidade implements Busca {
     public void imprimir(String destination) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(destination))) {
             bufferedWriter.write("--- BUSCA PROFUNDIDADE ----");
+            bufferedWriter.newLine();
+            bufferedWriter.write(String.format("Tempo de execução: %s milisegundos", getExecutionTime()));
             bufferedWriter.newLine();
             bufferedWriter.write("Pai\tVertice\tAberto\tFechado");
             bufferedWriter.newLine();
