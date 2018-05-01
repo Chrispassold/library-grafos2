@@ -87,7 +87,7 @@ public class BuscaLargura extends AbstractBusca {
     @Override
     public void imprimir(String destination) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(destination))) {
-            bufferedWriter.write(String.format("Tempo de execução: %s milisegundos", getExecutionTime()));
+            bufferedWriter.write(String.format("Tempo de execução: %s", getExecutionTime()));
             bufferedWriter.newLine();
             bufferedWriter.write(_printed.toString());
         } catch (IOException e) {

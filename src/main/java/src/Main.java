@@ -55,26 +55,33 @@ public class Main {
     }
 
     private static void buscaLargura() throws IOException {
+
+        System.out.println("Aguarde...");
+
         final AbstractGrafo<VerticeBuscaLargura> grafo = GrafoFactory.constroiGrafo(grafoFromConsole.getRepresentacao());
         BuscaLarguraGrafoFromFile grafoFromFile = new BuscaLarguraGrafoFromFile(grafo, grafoFromConsole.getPath());
         grafoFromFile.loadIntoGrafo();
 
         grafoInformationToFile(grafo);
 
-        Busca buscaLargura = new BuscaLargura(grafo, new VerticeBuscaLargura(grafoFromConsole.getVerticeInicial()));
-        buscaLargura.execute();
+        Busca busca = new BuscaLargura(grafo, new VerticeBuscaLargura(grafoFromConsole.getVerticeInicial()));
+        busca.execute();
+        busca.imprimir("main_buscalargura.out");
 
     }
 
     private static void buscaProfundidade() throws IOException {
+        System.out.println("Aguarde...");
+
         final AbstractGrafo<VerticeBuscaProfundidade> grafo = GrafoFactory.constroiGrafo(grafoFromConsole.getRepresentacao());
         BuscaProfundidadeGrafoFromFile grafoFromFile = new BuscaProfundidadeGrafoFromFile(grafo, grafoFromConsole.getPath());
         grafoFromFile.loadIntoGrafo();
 
         grafoInformationToFile(grafo);
 
-        Busca buscaLargura = new BuscaProfundidade(grafo);
-        buscaLargura.execute();
+        Busca busca = new BuscaProfundidade(grafo);
+        busca.execute();
+        busca.imprimir("main_buscaprofundidade.out");
     }
 
     private static <V extends Vertice> void grafoInformationToFile(final AbstractGrafo<V> grafo) {

@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class TesteInformacaoArquivo {
 
-    private String grafoIn = "teste1.txt";
+    private String grafoIn = "teste2.txt";
 
     @Test
     public void InformationGrafoToFileLABL() throws IOException {

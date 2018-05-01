@@ -16,20 +16,20 @@ public class InformacaoToArquivo {
         if (grafo == null) throw new InvalidParameterException("Grafo não pôde ser impresso");
 
         try (BufferedWriter out = new BufferedWriter(new FileWriter(destination))) {
-            //Escreve o grau dos vertices
-            final Iterator<Map.Entry<V, Integer>> grauVertices = grafo.getGrauVertices();
-            while (grauVertices.hasNext()) {
-                Map.Entry<V, Integer> next = grauVertices.next();
-                out.write(String.format("Vertice %s tem grau %d", next.getKey().getValor(), next.getValue()));
-                out.newLine();
-            }
-
             //Escreve a quantidade de arestas
             out.write(String.format("Quantidade de arestas: %d", grafo.getQuantidadeArestas()));
             out.newLine();
 
             //Escreve a quantidade de vertices
             out.write(String.format("Quantidade de vértices: %d", grafo.getQuantidadeVertices()));
+
+            //Escreve o grau dos vertices
+            final Iterator<Map.Entry<V, Integer>> grauVertices = grafo.getGrauVertices();
+            while (grauVertices.hasNext()) {
+                out.newLine();
+                Map.Entry<V, Integer> next = grauVertices.next();
+                out.write(String.format("Vertice %s tem grau %d", next.getKey().getValor(), next.getValue()));
+            }
 
             System.out.printf("O arquivo de saída foi gerado em %s", destination);
             System.out.println();
