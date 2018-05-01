@@ -19,7 +19,7 @@ abstract public class GrafoFromFile<V extends Vertice> {
         return _grafo;
     }
 
-    public AbstractGrafo<V> loadIntoGrafo() throws IOException {
+    public void loadIntoGrafo() throws IOException {
         File file = new File(this._arquivo);
         if (!file.exists() || !file.isFile()) {
             throw new FileNotFoundException("Arquivo inválido");
@@ -48,12 +48,9 @@ abstract public class GrafoFromFile<V extends Vertice> {
                     throw new InvalidFormatFileException(lineValues.length);
                 }
 
-                //Não dirigido
                 adicionarAresta(lineValues[0], lineValues[1]);
             }
         }
-
-        return getGrafo();
     }
 
     abstract public void adicionarAresta(String origem, String destino);

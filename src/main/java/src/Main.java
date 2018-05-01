@@ -61,7 +61,7 @@ public class Main {
 
         grafoInformationToFile(grafo);
 
-        Busca buscaLargura = new BuscaLargura(grafo, grafo.getVertice(grafoFromConsole.getVerticeInicial()));
+        Busca buscaLargura = new BuscaLargura(grafo, new VerticeBuscaLargura(grafoFromConsole.getVerticeInicial()));
         buscaLargura.execute();
 
     }

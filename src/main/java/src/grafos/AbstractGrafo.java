@@ -8,6 +8,8 @@ import java.util.Map;
 
 abstract public class AbstractGrafo<V extends Vertice> {
     private int _quantidadeVertices = 0;
+    private int _quantidadeArestas = 0;
+    private Map<V, Integer> _grauVertices = new HashMap<>();
 
     public void setQuantidadeVertices(int quantidadeVertices) {
         this._quantidadeVertices = quantidadeVertices;
@@ -18,34 +20,22 @@ abstract public class AbstractGrafo<V extends Vertice> {
     }
 
     public int getQuantidadeArestas() {
-        int arestas = 0;
-        final Iterator<Map.Entry<V, Integer>> grauVertices = getGrauVertices();
-        while (grauVertices.hasNext()) {
-            Map.Entry<V, Integer> next = grauVertices.next();
-            arestas += next.getValue();
-        }
-
-        return arestas / 2;
-    }
-
-    public V getVertice(String value) {
-        value = value.trim();
-        final Iterator<V> vertices = getVertices();
-        while (vertices.hasNext()) {
-            final V vertice = vertices.next();
-            if (vertice.getValor().equals(value)) {
-                return vertice;
-            }
-        }
-
-        return null;
+        return _quantidadeArestas;
+//        int arestas = 0;
+//        final Iterator<Map.Entry<V, Integer>> grauVertices = getGrauVertices();
+//        while (grauVertices.hasNext()) {
+//            Map.Entry<V, Integer> next = grauVertices.next();
+//            arestas += next.getValue();
+//        }
+//
+//        return arestas / 2;
     }
 
     public V getVertice(V value) {
         final Iterator<V> vertices = getVertices();
         while (vertices.hasNext()) {
             final V vertice = vertices.next();
-            if (vertice.equals(value)) {
+            if (vertice != null && vertice.equals(value)) {
                 return vertice;
             }
         }
@@ -73,42 +63,47 @@ abstract public class AbstractGrafo<V extends Vertice> {
         adicionarVertice(verticeDestino);
 
         adicionarArestaGrafo(verticeOrigem, verticeDestino);
+
+        _quantidadeArestas = _quantidadeArestas + 1;
+
+        incGrauVertice(verticeOrigem, verticeDestino);
     }
 
-    public boolean existVertice(V vertice) {
-        final Iterator<V> vertices = getVertices();
+    private void incGrauVertice(V verticeO, V verticeD) {
+        if (verticeO != null && verticeD != null) {
+            Integer grauVertice = _grauVertices.getOrDefault(verticeO, 0);
 
-        while (vertices.hasNext()) {
-            final V next = vertices.next();
-            if (next.equals(vertice)) {
-                return true;
+            if (verticeO.equals(verticeD)) {
+                grauVertice = grauVertice + 1;
             }
-        }
 
-        return false;
+            _grauVertices.put(verticeO, grauVertice + 1);
+        }
     }
 
     public Iterator<Map.Entry<V, Integer>> getGrauVertices() {
-        Map<V, Integer> grau = new HashMap<>();
-        final Iterator<V> vertices = getVertices();
+        return _grauVertices.entrySet().iterator();
 
-        vertices.forEachRemaining(vertice -> {
-            final Iterator<V> verticesAdjacentes = getVerticesAdjacentes(vertice);
-            int qntAdjacentes = 0;
-            while (verticesAdjacentes.hasNext()) {
-                final V verticeAdj = verticesAdjacentes.next();
-
-                if (verticeAdj.equals(vertice)) {
-                    qntAdjacentes += 1;
-                }
-
-                qntAdjacentes += 1;
-            }
-
-            grau.put(vertice, qntAdjacentes);
-        });
-
-        return grau.entrySet().iterator();
+//        Map<V, Integer> grau = new HashMap<>();
+//        final Iterator<V> vertices = getVertices();
+//
+//        vertices.forEachRemaining(vertice -> {
+//            final Iterator<V> verticesAdjacentes = getVerticesAdjacentes(vertice);
+//            int qntAdjacentes = 0;
+//            while (verticesAdjacentes.hasNext()) {
+//                final V verticeAdj = verticesAdjacentes.next();
+//
+//                if (verticeAdj.equals(vertice)) {
+//                    qntAdjacentes += 1;
+//                }
+//
+//                qntAdjacentes += 1;
+//            }
+//
+//            grau.put(vertice, qntAdjacentes);
+//        });
+//
+//        return grau.entrySet().iterator();
     }
 
     abstract protected void adicionarArestaGrafo(V verticeOrigem, V verticeDestino);
@@ -118,5 +113,7 @@ abstract public class AbstractGrafo<V extends Vertice> {
     abstract public Iterator<V> getVerticesAdjacentes(V u);
 
     abstract public Iterator<V> getVertices();
+
+    abstract public boolean existVertice(V vertice);
 
 }

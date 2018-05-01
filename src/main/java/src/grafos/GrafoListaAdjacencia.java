@@ -22,6 +22,11 @@ public class GrafoListaAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
     }
 
     @Override
+    public boolean existVertice(V vertice) {
+        return grafo.containsKey(vertice);
+    }
+
+    @Override
     public void adicionarVertice(V vertice) {
         if (!existVertice(vertice)) {
             grafo.put(vertice, new HashSet<>());
@@ -31,15 +36,11 @@ public class GrafoListaAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
 
     @Override
     protected void adicionarArestaGrafo(V verticeOrigem, V verticeDestino) {
-        adicionarAdjacencia(verticeOrigem, verticeDestino);
-    }
-
-    private void adicionarAdjacencia(V verticeOrigem, V verticeDestino){
         if (verticeDestino != null) {
             final Set<V> adj = grafo.get(verticeOrigem);
             adj.add(verticeDestino);
-
             grafo.put(verticeOrigem, adj);
         }
+
     }
 }
