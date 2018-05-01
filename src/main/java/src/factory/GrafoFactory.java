@@ -7,7 +7,7 @@ import src.grafos.GrafoListaAdjacencia;
 import src.grafos.GrafoMatrizAdjacencia;
 
 public class GrafoFactory implements Factory {
-    public static <V extends Vertice> AbstractGrafo<V> constroiGrafo(ERepresentacao r, Class<V> clazz) throws RuntimeException {
+    public static <V extends Vertice> AbstractGrafo<V> constroiGrafo(ERepresentacao r) throws RuntimeException {
         switch (r) {
             case LISTA_ADJACENCIA:
                 return new GrafoListaAdjacencia<>();

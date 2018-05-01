@@ -8,6 +8,7 @@ import java.util.Objects;
  */
 abstract public class Vertice {
     private String valor;
+    private ECor cor = ECor.Branco;
 
     /**
      * Cria um vértice com várias arestas.
@@ -16,11 +17,23 @@ abstract public class Vertice {
         if (valor == null || valor.isEmpty())
             throw new InvalidParameterException(String.format("O vértice deve conter um valor válido, teve %s", String.valueOf(valor)));
 
-        this.valor = valor.toUpperCase(); //para ficar esteticamente organizado
+        setValor(valor.toUpperCase()); //para ficar esteticamente organizado
     }
 
     public String getValor() {
         return valor;
+    }
+
+    private void setValor(String valor) {
+        this.valor = valor;
+    }
+
+    public ECor getCor() {
+        return cor;
+    }
+
+    public void setCor(ECor cor) {
+        this.cor = cor;
     }
 
     @Override

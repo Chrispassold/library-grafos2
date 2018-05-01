@@ -1,11 +1,9 @@
 package src.core.vertices;
 
-import src.core.ECor;
 import src.core.Vertice;
 
 public class VerticeBuscaProfundidade extends Vertice {
 
-    private ECor cor = ECor.Branco;
     private int tempoDescoberta = (int) Float.POSITIVE_INFINITY;
     private int tempoFinalizacao = (int) Float.POSITIVE_INFINITY;
     private VerticeBuscaProfundidade pai = null;
@@ -17,14 +15,6 @@ public class VerticeBuscaProfundidade extends Vertice {
      */
     public VerticeBuscaProfundidade(String valor) {
         super(valor);
-    }
-
-    public ECor getCor() {
-        return cor;
-    }
-
-    public void setCor(ECor cor) {
-        this.cor = cor;
     }
 
     public int getTempoDescoberta() {

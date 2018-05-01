@@ -11,13 +11,13 @@ import src.core.vertices.VerticeBuscaProfundidade;
 import src.factory.GrafoFactory;
 import src.grafos.AbstractGrafo;
 import src.input.GrafoFromConsole;
-import src.input.GrafoFromFile;
+import src.input.file.BuscaLarguraGrafoFromFile;
+import src.input.file.BuscaProfundidadeGrafoFromFile;
 import src.output.InformacaoToArquivo;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Iterator;
 
 public class Main {
     private static GrafoFromConsole grafoFromConsole;
@@ -55,15 +55,9 @@ public class Main {
     }
 
     private static void buscaLargura() throws IOException {
-        final AbstractGrafo<VerticeBuscaLargura> grafo = GrafoFactory.constroiGrafo(grafoFromConsole.getRepresentacao(), VerticeBuscaLargura.class);
-        GrafoFromFile grafoFromFile = new GrafoFromFile(grafoFromConsole.getPath());
-
-        //setup grafo
-        grafo.setQuantidadeVertices(grafoFromFile.getQuantidadeVertices());
-        grafoFromFile.getVertices().forEachRemaining(origem -> {
-            Iterator<String> adjacentes = grafoFromFile.getAdjacentes(origem);
-            adjacentes.forEachRemaining(destino -> grafo.adicionarAresta(new VerticeBuscaLargura(origem), new VerticeBuscaLargura(destino)));
-        });
+        final AbstractGrafo<VerticeBuscaLargura> grafo = GrafoFactory.constroiGrafo(grafoFromConsole.getRepresentacao());
+        BuscaLarguraGrafoFromFile grafoFromFile = new BuscaLarguraGrafoFromFile(grafo, grafoFromConsole.getPath());
+        grafoFromFile.loadIntoGrafo();
 
         grafoInformationToFile(grafo);
 
@@ -73,16 +67,9 @@ public class Main {
     }
 
     private static void buscaProfundidade() throws IOException {
-        final AbstractGrafo<VerticeBuscaProfundidade> grafo = GrafoFactory.constroiGrafo(grafoFromConsole.getRepresentacao(), VerticeBuscaProfundidade.class);
-
-        GrafoFromFile grafoFromFile = new GrafoFromFile(grafoFromConsole.getPath());
-
-        //setup grafo
-        grafo.setQuantidadeVertices(grafoFromFile.getQuantidadeVertices());
-        grafoFromFile.getVertices().forEachRemaining(origem -> {
-            Iterator<String> adjacentes = grafoFromFile.getAdjacentes(origem);
-            adjacentes.forEachRemaining(destino -> grafo.adicionarAresta(new VerticeBuscaProfundidade(origem), new VerticeBuscaProfundidade(destino)));
-        });
+        final AbstractGrafo<VerticeBuscaProfundidade> grafo = GrafoFactory.constroiGrafo(grafoFromConsole.getRepresentacao());
+        BuscaProfundidadeGrafoFromFile grafoFromFile = new BuscaProfundidadeGrafoFromFile(grafo, grafoFromConsole.getPath());
+        grafoFromFile.loadIntoGrafo();
 
         grafoInformationToFile(grafo);
 
