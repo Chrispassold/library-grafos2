@@ -36,7 +36,7 @@ public class TesteBusca {
             adjacentes.forEachRemaining(destino -> grafo.adicionarAresta(new VerticeBuscaLargura(origem), new VerticeBuscaLargura(destino)));
         });
 
-        Busca buscaLargura = new BuscaLargura(grafo, new VerticeBuscaLargura("1"));
+        Busca buscaLargura = new BuscaLargura(grafo, new VerticeBuscaLargura("A"));
         buscaLargura.execute();
         buscaLargura.imprimir("print_buscaLarguraLA.out");
     }
@@ -53,7 +53,7 @@ public class TesteBusca {
             adjacentes.forEachRemaining(destino -> grafo.adicionarAresta(new VerticeBuscaLargura(origem), new VerticeBuscaLargura(destino)));
         });
 
-        Busca buscaLargura = new BuscaLargura(grafo, new VerticeBuscaLargura("1"));
+        Busca buscaLargura = new BuscaLargura(grafo, new VerticeBuscaLargura("A"));
         buscaLargura.execute();
         buscaLargura.imprimir("print_buscaLarguraMA.out");
     }
