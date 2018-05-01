@@ -7,8 +7,7 @@ import java.util.*;
 public class GrafoMatrizAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
     private int _tamanhoAtual = 0;
 
-    private Integer[][] _matrizAdj;
-    //TODO: TAKE A LOOK https://stackoverflow.com/questions/3876722/java-lang-outofmemoryerror-java-heap-space
+    private boolean[][] _matrizAdj;
 
     private Map<Integer, V> IntToVert = new HashMap<>();
     private Map<V, Integer> VertToInt = new HashMap<>();
@@ -16,7 +15,8 @@ public class GrafoMatrizAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
     @Override
     public void setQuantidadeVertices(int quantidadeVertices) {
         super.setQuantidadeVertices(quantidadeVertices);
-        _matrizAdj = new Integer[quantidadeVertices][quantidadeVertices];
+        System.out.println(quantidadeVertices);
+        _matrizAdj = new boolean[quantidadeVertices][quantidadeVertices];
     }
 
     /**
@@ -42,7 +42,7 @@ public class GrafoMatrizAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
         int key = VertToInt.get(vertice);
 
         for (int i = 0; i < _tamanhoAtual; i++) {
-            if (_matrizAdj[key][i] != null) {
+            if (_matrizAdj[key][i]) {
                 adjs.add(IntToVert.get(i));
             }
         }
@@ -73,7 +73,10 @@ public class GrafoMatrizAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
             throw new RuntimeException("Não é possível adicionar um vertice, pois o vertice origem se encontra nulo");
         }
 
-        this._matrizAdj[this.VertToInt.get(verticeOrigem)][this.VertToInt.get(verticeDestino)] = 1;
+        Integer refOrigem = this.VertToInt.get(verticeOrigem);
+        Integer refDestino = this.VertToInt.get(verticeDestino);
+
+        this._matrizAdj[refOrigem][refDestino] = true;
     }
 
 }

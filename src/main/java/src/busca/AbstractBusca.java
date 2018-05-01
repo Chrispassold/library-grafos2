@@ -6,11 +6,11 @@ abstract public class AbstractBusca implements Busca {
     private long finalTimeExecution = 0;
 
     @Override
-    public long getExecutionTime() {
+    public String getExecutionTime() {
         long time = finalTimeExecution - initialTimeExecution;
 
-        if (time < 0) return 0;
-        return time;
+        if (time < 0) return Float.toString(0);
+        return Float.toString(time);
     }
 
     public void initializeTimeExecution() {

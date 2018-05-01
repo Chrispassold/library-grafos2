@@ -16,6 +16,7 @@ public class BuscaLargura extends AbstractBusca {
     private AbstractGrafo<VerticeBuscaLargura> grafo;
     private VerticeBuscaLargura verticeInicial;
     private List<VerticeBuscaLargura> listaBusca = new ArrayList<>();
+    private StringBuffer _printed;
 
     public BuscaLargura(AbstractGrafo<VerticeBuscaLargura> grafo, VerticeBuscaLargura verticeInicial) throws RuntimeException {
 
@@ -23,27 +24,35 @@ public class BuscaLargura extends AbstractBusca {
             throw new RuntimeException("Grafo nulo");
         }
 
-        if (verticeInicial == null || !grafo.existVertice(verticeInicial)) {
-            throw new RuntimeException("Vertice inicial não existe no grafo informado");
-        }
-
         this.grafo = grafo;
         this.verticeInicial = grafo.getVertice(verticeInicial);
 
+        if (this.verticeInicial == null) {
+            throw new RuntimeException("Vertice inicial não existe no grafo informado");
+        }
+
+        inicializaPrinter();
         inicializaGrafo();
     }
 
-    private void inicializaGrafo() {
-        Iterator<VerticeBuscaLargura> vertices = grafo.getVertices();
-        while (vertices.hasNext()) {
-            VerticeBuscaLargura next = vertices.next();
-            if (!next.equals(verticeInicial)) {
-                next.setCor(ECor.Branco);
-                next.setDistancia((int) Float.POSITIVE_INFINITY);
-                next.setPai(null);
-            }
-        }
+    private void inicializaPrinter() {
+        _printed = new StringBuffer();
 
+        _printed.append("--- BUSCA LARGURA ----").append('\n');
+        _printed.append("Pai\tVertice\tDistancia").append('\n');
+    }
+
+    private void printer(VerticeBuscaLargura vertice) {
+        final String format = "%s\t%s\t%d";
+
+        _printed.append(String.format(format,
+                vertice.getPai() != null ? vertice.getPai().getValor() : ".",
+                vertice.getValor(),
+                vertice.getDistancia())).append('\n');
+
+    }
+
+    private void inicializaGrafo() {
         verticeInicial.setDistancia(0);
         verticeInicial.setPai(null);
         verticeInicial.setCor(ECor.Cinza);
@@ -69,6 +78,7 @@ public class BuscaLargura extends AbstractBusca {
                 }
             }
             removido.setCor(ECor.Preto);
+            printer(removido);
         }
 
         finalizeTimeExecution();
@@ -76,27 +86,10 @@ public class BuscaLargura extends AbstractBusca {
 
     @Override
     public void imprimir(String destination) {
-
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(destination))) {
-            bufferedWriter.write("--- BUSCA LARGURA ----");
-            bufferedWriter.newLine();
             bufferedWriter.write(String.format("Tempo de execução: %s milisegundos", getExecutionTime()));
             bufferedWriter.newLine();
-            bufferedWriter.write("Pai\tVertice\tDistancia");
-            bufferedWriter.newLine();
-            final String format = "%s\t%s\t%d";
-
-            final Iterator<VerticeBuscaLargura> vertices = grafo.getVertices();
-
-            while (vertices.hasNext()) {
-                final VerticeBuscaLargura verticeBuscaLargura = vertices.next();
-                bufferedWriter.write(String.format(format,
-                        verticeBuscaLargura.getPai() != null ? verticeBuscaLargura.getPai().getValor() : ".",
-                        verticeBuscaLargura.getValor(),
-                        verticeBuscaLargura.getDistancia()));
-                bufferedWriter.newLine();
-            }
-
+            bufferedWriter.write(_printed.toString());
         } catch (IOException e) {
             System.out.println("Não foi possivel criar arquivo da busca");
             e.printStackTrace();

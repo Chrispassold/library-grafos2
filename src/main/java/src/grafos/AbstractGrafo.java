@@ -32,11 +32,13 @@ abstract public class AbstractGrafo<V extends Vertice> {
     }
 
     public V getVertice(V value) {
-        final Iterator<V> vertices = getVertices();
-        while (vertices.hasNext()) {
-            final V vertice = vertices.next();
-            if (vertice != null && vertice.equals(value)) {
-                return vertice;
+        if (value != null) {
+            final Iterator<V> vertices = getVertices();
+            while (vertices.hasNext()) {
+                final V vertice = vertices.next();
+                if (vertice != null && vertice.equals(value)) {
+                    return vertice;
+                }
             }
         }
 
