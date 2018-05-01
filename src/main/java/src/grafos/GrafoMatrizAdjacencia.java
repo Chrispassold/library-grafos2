@@ -8,11 +8,10 @@ public class GrafoMatrizAdjacencia<V extends Vertice> extends AbstractGrafo<V> {
     private int _tamanhoAtual = 0;
 
     private Integer[][] _matrizAdj;
+    //TODO: TAKE A LOOK https://stackoverflow.com/questions/3876722/java-lang-outofmemoryerror-java-heap-space
 
     private Map<Integer, V> IntToVert = new HashMap<>();
     private Map<V, Integer> VertToInt = new HashMap<>();
-
-    //TODO: TAKE A LOOK https://stackoverflow.com/questions/3876722/java-lang-outofmemoryerror-java-heap-space
 
     @Override
     public void setQuantidadeVertices(int quantidadeVertices) {
