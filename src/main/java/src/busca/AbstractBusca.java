@@ -1,23 +1,26 @@
 package src.busca;
 
+import src.utils.DurationUtils;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 abstract public class AbstractBusca implements Busca {
     //Executation
-    private long initialTimeExecution = 0;
-    private long finalTimeExecution = 0;
+    private LocalDateTime initialTimeExecution;
+    private LocalDateTime finalTimeExecution;
 
     @Override
     public String getExecutionTime() {
-        long time = finalTimeExecution - initialTimeExecution;
-
-        if (time < 0) return Float.toString(0);
-        return Float.toString(time);
+        Duration between = Duration.between(initialTimeExecution, finalTimeExecution);
+        return DurationUtils.formatDuration(between);
     }
 
-    public void initializeTimeExecution() {
-        this.initialTimeExecution = System.currentTimeMillis();
+    protected void initializeTimeExecution() {
+        this.initialTimeExecution = LocalDateTime.now();
     }
 
-    public void finalizeTimeExecution() {
-        this.finalTimeExecution = System.currentTimeMillis();
+    protected void finalizeTimeExecution() {
+        this.finalTimeExecution = LocalDateTime.now();
     }
 }

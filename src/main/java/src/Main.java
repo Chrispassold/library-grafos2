@@ -77,7 +77,13 @@ public class Main {
         buscaLargura.execute();
     }
 
-    private static <V extends Vertice> void grafoInformationToFile(AbstractGrafo<V> grafo) throws IOException {
-        InformacaoToArquivo.toFile(grafo, "grafo.out");
+    private static <V extends Vertice> void grafoInformationToFile(final AbstractGrafo<V> grafo) {
+        new Thread(() -> {
+            try {
+                InformacaoToArquivo.toFile(grafo, "grafo.out");
+            } catch (Exception e) {
+                System.out.println("Ocorreu um problema: " + e.getMessage());
+            }
+        }).start();
     }
 }

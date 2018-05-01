@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class TesteBusca {
 
-    private String grafoIn = "grafo.in";
+    private String grafoIn = "teste1.txt";
 
 
     @Test
@@ -27,7 +27,7 @@ public class TesteBusca {
         BuscaLarguraGrafoFromFile grafoFromFile = new BuscaLarguraGrafoFromFile(grafo, grafoIn);
         grafoFromFile.loadIntoGrafo();
 
-        Busca buscaLargura = new BuscaLargura(grafo, new VerticeBuscaLargura("A"));
+        Busca buscaLargura = new BuscaLargura(grafo, new VerticeBuscaLargura("1"));
         buscaLargura.execute();
         buscaLargura.imprimir("print_buscaLarguraLA.out");
     }
@@ -40,7 +40,7 @@ public class TesteBusca {
         BuscaLarguraGrafoFromFile grafoFromFile = new BuscaLarguraGrafoFromFile(grafo, grafoIn);
         grafoFromFile.loadIntoGrafo();
 
-        Busca buscaLargura = new BuscaLargura(grafo, new VerticeBuscaLargura("A"));
+        Busca buscaLargura = new BuscaLargura(grafo, new VerticeBuscaLargura("1"));
         buscaLargura.execute();
         buscaLargura.imprimir("print_buscaLarguraMA.out");
     }
